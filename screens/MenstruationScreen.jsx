@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -16,7 +17,6 @@ export default function MenstruationScreen() {
   const [duration, setDuration] = useState("5");
   const [cycle, setCycle] = useState("28");
   const [showPicker, setShowPicker] = useState(false);
-
   const [predictions, setPredictions] = useState(null);
 
   useEffect(() => {
@@ -38,22 +38,33 @@ export default function MenstruationScreen() {
   }, []);
 
   const saveData = async () => {
+    const dur = parseInt(duration);
+    const cyc = parseInt(cycle);
+    if (isNaN(dur) || isNaN(cyc)) {
+      Alert.alert("Input tidak valid", "Durasi dan Siklus harus berupa angka.");
+      return;
+    }
+
     const data = {
       lastPeriod: lastPeriod.toISOString(),
-      duration: parseInt(duration),
-      cycleLength: parseInt(cycle),
+      duration: dur,
+      cycleLength: cyc,
     };
     await AsyncStorage.setItem("@menstruation_data", JSON.stringify(data));
-    calculatePrediction(lastPeriod, data.duration, data.cycleLength);
+    calculatePrediction(lastPeriod, dur, cyc);
 
-    // ⏰ Jadwalkan notifikasi
+    // ⏰ Jadwal notifikasi haid berikutnya
     const nextPeriod = new Date(lastPeriod);
-    nextPeriod.setDate(nextPeriod.getDate() + data.cycleLength);
-
+    nextPeriod.setDate(nextPeriod.getDate() + cyc);
     await scheduleNotification(
       nextPeriod,
       "Pengingat Haid",
       "Hari ini kamu diperkirakan mulai haid."
+    );
+
+    Alert.alert(
+      "Berhasil",
+      "Data siklus haid disimpan dan prediksi diperbarui."
     );
   };
 
@@ -62,13 +73,20 @@ export default function MenstruationScreen() {
     nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
 
     const ovulation = new Date(nextPeriod);
-    ovulation.setDate(ovulation.getDate() - 14); // Ovulasi 14 hari sebelum haid berikutnya
+    ovulation.setDate(ovulation.getDate() - 14);
+
+    const fertileStart = new Date(ovulation);
+    fertileStart.setDate(fertileStart.getDate() - 2);
+
+    const fertileEnd = new Date(ovulation);
+    fertileEnd.setDate(fertileEnd.getDate() + 2);
 
     const pmsStart = new Date(nextPeriod);
-    pmsStart.setDate(pmsStart.getDate() - 5); // PMS 5 hari sebelum haid
+    pmsStart.setDate(pmsStart.getDate() - 5);
 
     setPredictions({
       nextPeriod: nextPeriod.toDateString(),
+      fertileRange: `${fertileStart.toDateString()} - ${fertileEnd.toDateString()}`,
       ovulation: ovulation.toDateString(),
       pms: pmsStart.toDateString(),
     });
@@ -104,6 +122,7 @@ export default function MenstruationScreen() {
         value={duration}
         onChangeText={setDuration}
         keyboardType="numeric"
+        placeholder="Misal 5"
       />
 
       <Text>Rata-rata Siklus (hari):</Text>
@@ -112,6 +131,7 @@ export default function MenstruationScreen() {
         value={cycle}
         onChangeText={setCycle}
         keyboardType="numeric"
+        placeholder="Misal 28"
       />
 
       <Button title="Simpan & Prediksi" onPress={saveData} />
@@ -120,7 +140,8 @@ export default function MenstruationScreen() {
         <View style={styles.result}>
           <Text style={styles.resultTitle}>Hasil Prediksi:</Text>
           <Text>Haid Berikutnya: {predictions.nextPeriod}</Text>
-          <Text>Masa Subur (Ovulasi): {predictions.ovulation}</Text>
+          <Text>Masa Subur: {predictions.fertileRange}</Text>
+          <Text>Ovulasi: {predictions.ovulation}</Text>
           <Text>Perkiraan PMS: {predictions.pms}</Text>
         </View>
       )}

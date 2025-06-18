@@ -7,9 +7,11 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { scheduleNotification } from "../services/NotificationService";
 
 export default function ImmunizationScreen() {
   const [name, setName] = useState("");
@@ -32,19 +34,52 @@ export default function ImmunizationScreen() {
     await AsyncStorage.setItem("@immunization_data", JSON.stringify(newList));
   };
 
-  const addItem = () => {
-    if (!name) return;
+  const addItem = async () => {
+    if (!name) {
+      Alert.alert("Nama imunisasi wajib diisi.");
+      return;
+    }
+
     const newItem = {
       name,
       date: date.toISOString(),
       done: false,
     };
+
     const updated = [...list, newItem].sort(
       (a, b) => new Date(a.date) - new Date(b.date)
     );
-    saveList(updated);
+
+    await saveList(updated);
     setName("");
     setDate(new Date());
+
+    const targetDate = new Date(newItem.date);
+
+    // Jadwal notifikasi hari-H
+    await scheduleNotification(
+      targetDate,
+      "Jadwal Imunisasi Anak",
+      `Hari ini jadwal imunisasi untuk: ${newItem.name}`
+    );
+
+    // Notifikasi H-1
+    const minus1 = new Date(targetDate);
+    minus1.setDate(minus1.getDate() - 1);
+    await scheduleNotification(
+      minus1,
+      "Pengingat Imunisasi",
+      `Besok adalah jadwal imunisasi untuk: ${newItem.name}`
+    );
+
+    // Notifikasi H-3
+    const minus3 = new Date(targetDate);
+    minus3.setDate(minus3.getDate() - 3);
+    await scheduleNotification(
+      minus3,
+      "Pengingat Imunisasi",
+      `Imunisasi untuk ${newItem.name} dijadwalkan 3 hari lagi`
+    );
   };
 
   const toggleDone = (index) => {
@@ -102,7 +137,7 @@ export default function ImmunizationScreen() {
       <FlatList
         style={{ marginTop: 24 }}
         data={list}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
       />
     </View>

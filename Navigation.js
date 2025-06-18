@@ -19,6 +19,7 @@ import PranikahDetailScreen from "./screens/PranikahDetailScreen";
 import EdukasiScreen from "./screens/EdukasiScreen";
 import EdukasiDetailScreen from "./screens/EdukasiDetailScreen";
 import GrowthChartScreen from "./screens/GrowthChartScreen";
+import KBScreen from "./screens/KBScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -92,6 +93,7 @@ export default function Navigation() {
               component={EdukasiDetailScreen}
             />
             <Stack.Screen name="GrowthChart" component={GrowthChartScreen} />
+            <Stack.Screen name="KB" component={KBScreen} />
             {/* Tambah screen lain di sini nanti */}
           </>
         )}

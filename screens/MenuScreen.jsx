@@ -48,6 +48,11 @@ export default function MenuScreen({ navigation }) {
       icon: "stats-chart",
       onPress: () => navigation.navigate("GrowthChart"),
     },
+    {
+      label: "Simulasi KB",
+      icon: "female",
+      onPress: () => navigation.navigate("KB"),
+    },
   ];
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.card} onPress={item.onPress}>
