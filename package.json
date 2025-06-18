@@ -14,7 +14,8 @@
     "react": "19.0.0",
     "react-native": "0.79.3",
     "react-native-chart-kit": "^6.12.0",
-    "react-native-svg": "15.11.2"
+    "react-native-svg": "15.11.2",
+    "expo-notifications": "~0.31.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
