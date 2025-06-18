@@ -43,6 +43,11 @@ export default function MenuScreen({ navigation }) {
       icon: "people",
       onPress: () => navigation.navigate("Pranikah"),
     },
+    {
+      label: "Grafik Tumbuh Kembang",
+      icon: "stats-chart",
+      onPress: () => navigation.navigate("GrowthChart"),
+    },
   ];
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.card} onPress={item.onPress}>

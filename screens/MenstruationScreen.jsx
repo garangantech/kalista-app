@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { scheduleNotification } from "../services/NotificationService";
 
 export default function MenstruationScreen() {
   const [lastPeriod, setLastPeriod] = useState(new Date());
@@ -44,6 +45,16 @@ export default function MenstruationScreen() {
     };
     await AsyncStorage.setItem("@menstruation_data", JSON.stringify(data));
     calculatePrediction(lastPeriod, data.duration, data.cycleLength);
+
+    // ⏰ Jadwalkan notifikasi
+    const nextPeriod = new Date(lastPeriod);
+    nextPeriod.setDate(nextPeriod.getDate() + data.cycleLength);
+
+    await scheduleNotification(
+      nextPeriod,
+      "Pengingat Haid",
+      "Hari ini kamu diperkirakan mulai haid."
+    );
   };
 
   const calculatePrediction = (startDate, duration, cycleLength) => {
