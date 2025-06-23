@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import edukasiData from "../data/edukasi.json";
+import pranikahData from "../data/pranikah.json";
 
 const CARD_SIZE = Dimensions.get("window").width / 3 - 24;
 
@@ -31,6 +33,21 @@ export default function DashboardScreen({ navigation }) {
       label: "Imunisasi",
       icon: "medkit",
       onPress: () => navigation.navigate("Immunization"),
+    },
+    {
+      label: "Simulasi KB",
+      icon: "female",
+      onPress: () => navigation.navigate("KB"),
+    },
+    {
+      label: "Pranikah",
+      icon: "people",
+      onPress: () => navigation.navigate("Pranikah"),
+    },
+    {
+      label: "Edukasi",
+      icon: "book",
+      onPress: () => navigation.navigate("Edukasi"),
     },
   ];
 
@@ -59,22 +76,77 @@ export default function DashboardScreen({ navigation }) {
     </TouchableOpacity>
   );
 
+  const renderEdukasiCard = (item) => (
+    <TouchableOpacity
+      key={item.id}
+      style={styles.articleCard}
+      onPress={() => navigation.navigate("EdukasiDetail", { item })}
+    >
+      <Text style={styles.articleTitle}>{item.title}</Text>
+      {item.summary && (
+        <Text style={styles.articleSummary} numberOfLines={2}>
+          {item.summary}
+        </Text>
+      )}
+    </TouchableOpacity>
+  );
+
+  const renderPranikahCard = (item) => (
+    <TouchableOpacity
+      key={item.id}
+      style={styles.articleCard}
+      onPress={() => navigation.navigate("PranikahDetail", { item })}
+    >
+      <Text style={styles.articleTitle}>{item.title}</Text>
+      {item.summary && (
+        <Text style={styles.articleSummary} numberOfLines={2}>
+          {item.summary}
+        </Text>
+      )}
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {userName ? `Halo, ${userName} 👋` : "Selamat Datang di KALISTA"}
-      </Text>
-      {userStatus && (
-        <Text style={styles.statusText}>Status: {userStatus}</Text>
-      )}
+      <View style={styles.headerRow}>
+        <Text style={styles.title}>
+          {userName ? `Halo, ${userName} 👋` : "Selamat Datang di KALISTA"}
+        </Text>
+        {/* {userStatus && (
+          <Text style={styles.statusText}>Status: {userStatus}</Text>
+        )} */}
+        <Text style={styles.statusText}>
+          <Text style={{ color: "blue", fontWeight: "bold" }}>KALISTA</Text>{" "}
+          Mobile
+        </Text>
+      </View>
 
-      <Text style={styles.subtitle}>Akses cepat fitur utama:</Text>
       <FlatList
         data={menuItems}
         renderItem={renderItem}
         keyExtractor={(item) => item.label}
         numColumns={3}
         contentContainerStyle={styles.menuGrid}
+      />
+
+      <Text style={styles.sectionTitle}>Artikel Edukasi</Text>
+      <FlatList
+        data={edukasiData}
+        horizontal
+        renderItem={({ item }) => renderEdukasiCard(item)}
+        keyExtractor={(item) => `edukasi-${item.id}`}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.articleList}
+      />
+
+      <Text style={styles.sectionTitle}>Tips Pranikah</Text>
+      <FlatList
+        data={pranikahData}
+        horizontal
+        renderItem={({ item }) => renderPranikahCard(item)}
+        keyExtractor={(item) => `pranikah-${item.id}`}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.articleList}
       />
     </View>
   );
@@ -83,31 +155,35 @@ export default function DashboardScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 20,
+  },
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    // backgroundColor: "yellow",
+    marginTop: 12,
+    marginBottom: 12,
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 4,
   },
   statusText: {
-    fontSize: 16,
+    fontSize: 19,
     color: "#555",
-    marginBottom: 12,
-  },
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 20,
   },
   menuGrid: {
     alignItems: "center",
+    marginBottom: -30,
+    paddingHorizontal: 12,
   },
   card: {
     width: CARD_SIZE,
     height: CARD_SIZE,
     backgroundColor: "#F0F4F8",
     borderRadius: 12,
-    margin: 8,
+    margin: 6,
     alignItems: "center",
     justifyContent: "center",
     elevation: 2,
@@ -117,5 +193,33 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "500",
     textAlign: "center",
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 12,
+  },
+  articleList: {
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingBottom: 20,
+  },
+  articleCard: {
+    width: 280,
+    backgroundColor: "#E8F0FE",
+    borderRadius: 10,
+    padding: 12,
+    marginLeft: -5,
+    marginRight: 12,
+    elevation: 2,
+  },
+  articleTitle: {
+    fontSize: 15,
+    fontWeight: "bold",
+    marginBottom: 6,
+  },
+  articleSummary: {
+    fontSize: 13,
+    color: "#444",
   },
 });

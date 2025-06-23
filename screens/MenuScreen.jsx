@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    marginTop: 20,
     marginBottom: 20,
     textAlign: "center",
   },
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   card: {
     width: CARD_SIZE,
     height: CARD_SIZE,
-    margin: 10,
+    margin: 9,
     backgroundColor: "#F0F4F8",
     borderRadius: 16,
     alignItems: "center",
