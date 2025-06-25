@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import Navigation from "./Navigation";
 import * as Notifications from "expo-notifications";
-import { Platform } from "react-native";
+import { Platform, ScrollView } from "react-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function MenuItemCard({ icon, label, onPress }) {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Ionicons name={icon} size={32} color="#4A90E2" />
+      <Ionicons name={icon} size={32} color="#fe61ad" />
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>
   );

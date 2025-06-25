@@ -20,6 +20,9 @@ import EdukasiScreen from "./screens/EdukasiScreen";
 import EdukasiDetailScreen from "./screens/EdukasiDetailScreen";
 import GrowthChartScreen from "./screens/GrowthChartScreen";
 import KBScreen from "./screens/KBScreen";
+import CustomDashboardHeader from "./components/CustomDashboardHeader";
+import { TouchableOpacity, View } from "react-native";
+import { Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,19 +31,62 @@ function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: false,
+        headerShown: true,
+        tabBarActiveTintColor: "#fe61ad",
         tabBarIcon: ({ color, size }) => {
           let iconName;
-          if (route.name === "Home") iconName = "home";
-          else if (route.name === "Menu") iconName = "apps";
-          else if (route.name === "Profil") iconName = "person";
+          if (route.name === "Home") iconName = "home-outline";
+          else if (route.name === "Menu") iconName = "apps-outline";
+          else if (route.name === "Notif") iconName = "notifications-outline";
+          else if (route.name === "About")
+            iconName = "information-circle-outline";
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
     >
-      <Tab.Screen name="Home" component={DashboardScreen} />
-      <Tab.Screen name="Menu" component={MenuScreen} />
-      <Tab.Screen name="Profil" component={ProfileScreen} />
+      <Tab.Screen
+        name="Home"
+        component={DashboardScreen}
+        options={{
+          headerTitle: () => (
+            <CustomDashboardHeader
+              onPress={() => console.log("Profile dibuka")}
+            />
+          ),
+          headerTitleAlign: "center",
+          headerTitleContainerStyle: {
+            width: "100%",
+          },
+          headerStyle: {
+            backgroundColor: "#fff",
+            borderBottomWidth: 1,
+            borderBottomColor: "#ccc",
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Menu"
+        component={MenuScreen}
+        options={{
+          title: "Semua Menu Fiturs",
+          headerTitle: () => (
+            <TouchableOpacity
+              onPress={() => console.log("tombol ditekan")}
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 20,
+              }}
+            >
+              <Ionicons name="arrow-back" size={24} />
+              <Text style={{ fontSize: 20 }}>Semua Menu Fitur</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Tab.Screen name="Notif" component={ProfileScreen} />
+      <Tab.Screen name="About" component={MenuScreen} />
     </Tab.Navigator>
   );
 }
@@ -75,7 +121,11 @@ export default function Navigation() {
         ) : (
           <>
             <Stack.Screen name="MainTabs" component={MainTabs} />
-            <Stack.Screen name="Menstruation" component={MenstruationScreen} />
+            <Stack.Screen
+              name="Menstruation"
+              component={MenstruationScreen}
+              options={{ headerShown: true, title: "Fitur Siklus Haid" }}
+            />
             <Stack.Screen name="Pregnancy" component={PregnancyScreen} />
             <Stack.Screen name="Immunization" component={ImmunizationScreen} />
             <Stack.Screen

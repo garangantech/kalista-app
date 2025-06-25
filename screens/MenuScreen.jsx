@@ -56,14 +56,13 @@ export default function MenuScreen({ navigation }) {
   ];
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.card} onPress={item.onPress}>
-      <Ionicons name={item.icon} size={36} color="#4A90E2" />
+      <Ionicons name={item.icon} size={36} color="#fe61ad" />
       <Text style={styles.label}>{item.label}</Text>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Semua Menu Fitur</Text>
       <FlatList
         data={menuItems}
         renderItem={renderItem}
@@ -78,7 +77,8 @@ export default function MenuScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
   },
   title: {
     fontSize: 20,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     width: CARD_SIZE,
     height: CARD_SIZE,
     margin: 9,
-    backgroundColor: "#F0F4F8",
+    backgroundColor: "#fff",
     borderRadius: 16,
     alignItems: "center",
     justifyContent: "center",
