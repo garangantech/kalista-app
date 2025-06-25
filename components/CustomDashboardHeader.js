@@ -27,8 +27,9 @@ export default function CustomDashboardHeader({ onPress }) {
             style={styles.searchInput}
           />
         </View>
-
-        <Ionicons name="person-circle" size={35} color="#fe61ad" />
+        <TouchableOpacity onPress={onPress}>
+          <Ionicons name="person-circle" size={35} color="#fe61ad" />
+        </TouchableOpacity>
       </View>
     </View>
   );

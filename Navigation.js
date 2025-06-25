@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  useNavigation,
+  useNavigationContainerRef,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -27,7 +31,7 @@ import { Text } from "react-native";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainTabs() {
+function MainTabs({ navigation }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -50,7 +54,7 @@ function MainTabs() {
         options={{
           headerTitle: () => (
             <CustomDashboardHeader
-              onPress={() => console.log("Profile dibuka")}
+              onPress={() => navigation.navigate("Profile")}
             />
           ),
           headerTitleAlign: "center",
@@ -68,7 +72,6 @@ function MainTabs() {
         name="Menu"
         component={MenuScreen}
         options={{
-          title: "Semua Menu Fiturs",
           headerTitle: () => (
             <TouchableOpacity
               onPress={() => console.log("tombol ditekan")}
@@ -144,6 +147,7 @@ export default function Navigation() {
             />
             <Stack.Screen name="GrowthChart" component={GrowthChartScreen} />
             <Stack.Screen name="KB" component={KBScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
             {/* Tambah screen lain di sini nanti */}
           </>
         )}

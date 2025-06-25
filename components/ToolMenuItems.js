@@ -1,28 +1,48 @@
-// components/ToolMenuItems.js
-
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome6 } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+
+const iconLibraries = {
+  Ionicons,
+  MaterialCommunityIcons,
+  FontAwesome,
+  FontAwesome6,
+  Entypo,
+  AntDesign,
+  Feather,
+};
 
 export default function ToolMenuItems({ data, onItemPress }) {
   return (
     <View style={styles.container}>
-      {data.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.toolItem}
-          onPress={() => onItemPress?.(item)}
-        >
-          <View style={styles.iconCircle}>
-            {item.image ? (
-              <Image source={item.image} style={styles.iconImage} />
-            ) : (
-              <Ionicons name={item.icon} size={28} color="#fe61ad" />
-            )}
-          </View>
-          <Text style={styles.toolLabel}>{item.label}</Text>
-        </TouchableOpacity>
-      ))}
+      {data.map((item, index) => {
+        const IconComponent = item.iconLib
+          ? iconLibraries[item.iconLib] || Ionicons
+          : Ionicons;
+
+        return (
+          <TouchableOpacity
+            key={index}
+            style={styles.toolItem}
+            onPress={() => onItemPress?.(item)}
+          >
+            <View style={styles.iconCircle}>
+              {item.image ? (
+                <Image source={item.image} style={styles.iconImage} />
+              ) : (
+                <IconComponent name={item.icon} size={28} color="#fe61ad" />
+              )}
+            </View>
+            <Text style={styles.toolLabel}>{item.label}</Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 }

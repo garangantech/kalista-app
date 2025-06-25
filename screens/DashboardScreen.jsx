@@ -9,6 +9,8 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "@expo/vector-icons";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import EducationCard from "../components/EducationCard";
 import ToolMenuItems from "../components/ToolMenuItems";
 
@@ -49,10 +51,14 @@ export default function DashboardScreen({ navigation }) {
   ];
 
   const toolItems = [
-    { label: "Tracker", icon: "walk" },
-    { label: "Shopping", icon: "cart" },
-    { label: "Shopping", icon: "cart" },
-    { label: "Shopping", icon: "cart" },
+    { label: "BMI", icon: "fitness-outline", iconLib: "Ionicons" },
+    {
+      label: "Mood",
+      icon: "emoticon-happy-outline",
+      iconLib: "MaterialCommunityIcons",
+    },
+    { label: "Air", icon: "cup-water", iconLib: "MaterialCommunityIcons" },
+    { label: "Checklist", icon: "checkcircleo", iconLib: "AntDesign" },
   ];
 
   const renderItem = ({ item }) => (
