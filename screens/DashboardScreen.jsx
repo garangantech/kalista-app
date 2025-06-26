@@ -3,14 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   Dimensions,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MaterialCommunityIcons from "@expo/vector-icons";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import EducationCard from "../components/EducationCard";
 import ToolMenuItems from "../components/ToolMenuItems";
 
@@ -51,14 +48,30 @@ export default function DashboardScreen({ navigation }) {
   ];
 
   const toolItems = [
-    { label: "BMI", icon: "fitness-outline", iconLib: "Ionicons" },
+    {
+      label: "BMI",
+      icon: "fitness-outline",
+      iconLib: "Ionicons",
+      onPress: () => navigation.navigate("BMICalculator"),
+    },
     {
       label: "Mood",
       icon: "emoticon-happy-outline",
       iconLib: "MaterialCommunityIcons",
+      onPress: () => navigation.navigate("MoodTracker"),
     },
-    { label: "Air", icon: "cup-water", iconLib: "MaterialCommunityIcons" },
-    { label: "Checklist", icon: "checkcircleo", iconLib: "AntDesign" },
+    {
+      label: "Air",
+      icon: "cup-water",
+      iconLib: "MaterialCommunityIcons",
+      onPress: () => navigation.navigate("WaterCalculator"),
+    },
+    {
+      label: "Checklist",
+      icon: "checkcircleo",
+      iconLib: "AntDesign",
+      onPress: () => navigation.navigate("ChecklistScreen"),
+    },
   ];
 
   const renderItem = ({ item }) => (
@@ -117,10 +130,7 @@ export default function DashboardScreen({ navigation }) {
           borderRadius: 10,
         }}
       >
-        <ToolMenuItems
-          data={toolItems}
-          onItemPress={(item) => console.log("Clicked:", item.label)}
-        />
+        <ToolMenuItems data={toolItems} />
       </ScrollView>
     </ScrollView>
   );

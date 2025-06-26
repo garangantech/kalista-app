@@ -18,7 +18,7 @@ const iconLibraries = {
   Feather,
 };
 
-export default function ToolMenuItems({ data, onItemPress }) {
+export default function ToolMenuItems({ data }) {
   return (
     <View style={styles.container}>
       {data.map((item, index) => {
@@ -30,7 +30,7 @@ export default function ToolMenuItems({ data, onItemPress }) {
           <TouchableOpacity
             key={index}
             style={styles.toolItem}
-            onPress={() => onItemPress?.(item)}
+            onPress={item.onPress}
           >
             <View style={styles.iconCircle}>
               {item.image ? (

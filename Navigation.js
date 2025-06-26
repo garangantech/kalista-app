@@ -27,6 +27,10 @@ import KBScreen from "./screens/KBScreen";
 import CustomDashboardHeader from "./components/CustomDashboardHeader";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "react-native";
+import BMICalculatorScreen from "./screens/BMICalculatorScreen";
+import WaterCalculatorScreen from "./screens/WaterCalculatorScreen";
+import ChecklistScreen from "./screens/ChecklistScreen";
+import MoodTrackerScreen from "./screens/MoodTrackerScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -148,6 +152,16 @@ export default function Navigation() {
             <Stack.Screen name="GrowthChart" component={GrowthChartScreen} />
             <Stack.Screen name="KB" component={KBScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen
+              name="BMICalculator"
+              component={BMICalculatorScreen}
+            />
+            <Stack.Screen
+              name="WaterCalculator"
+              component={WaterCalculatorScreen}
+            />
+            <Stack.Screen name="ChecklistScreen" component={ChecklistScreen} />
+            <Stack.Screen name="MoodTracker" component={MoodTrackerScreen} />
             {/* Tambah screen lain di sini nanti */}
           </>
         )}
