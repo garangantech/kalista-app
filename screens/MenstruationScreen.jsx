@@ -134,7 +134,9 @@ export default function MenstruationScreen() {
         placeholder="Misal 28"
       />
 
-      <Button title="Simpan & Prediksi" onPress={saveData} />
+      <TouchableOpacity style={styles.saveButton} onPress={saveData}>
+        <Text style={styles.saveButtonText}>Simpan & Prediksi</Text>
+      </TouchableOpacity>
 
       {predictions && (
         <View style={styles.result}>
@@ -160,26 +162,51 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    marginVertical: 8,
-    borderRadius: 6,
+    backgroundColor: "#fdf6f9",
+    borderWidth: 0,
+    padding: 12,
+    borderRadius: 10,
+    marginBottom: 12,
+    shadowColor: "#ccc",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
   },
   dateBox: {
-    padding: 10,
-    backgroundColor: "#eee",
-    marginVertical: 8,
-    borderRadius: 6,
+    backgroundColor: "#fdf6f9",
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 12,
+    elevation: 1,
   },
   result: {
     marginTop: 24,
     padding: 16,
-    backgroundColor: "#F0F4F8",
-    borderRadius: 8,
+    backgroundColor: "#ffeef5",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#fe61ad40",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 1,
   },
   resultTitle: {
     fontWeight: "bold",
     marginBottom: 8,
+  },
+  saveButton: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  saveButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });

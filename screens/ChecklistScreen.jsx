@@ -137,7 +137,7 @@ export default function ChecklistScreen() {
             value={newItem}
             onChangeText={setNewItem}
           />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={addItem}>
             <Text style={styles.buttonText}>Tambah</Text>
           </TouchableOpacity>
         </View>

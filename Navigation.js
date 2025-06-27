@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   NavigationContainer,
   useNavigation,
@@ -92,7 +92,26 @@ function MainTabs({ navigation }) {
           ),
         }}
       />
-      <Tab.Screen name="Notif" component={ProfileScreen} />
+      <Tab.Screen
+        name="Notif"
+        component={ProfileScreen}
+        options={{
+          headerTitle: () => (
+            <TouchableOpacity
+              onPress={() => console.log("tombol ditekan")}
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 20,
+              }}
+            >
+              <Ionicons name="arrow-back" size={24} />
+              <Text style={{ fontSize: 20 }}>Notifikasi</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Tab.Screen name="About" component={MenuScreen} />
     </Tab.Navigator>
   );
@@ -133,25 +152,60 @@ export default function Navigation() {
               component={MenstruationScreen}
               options={{ headerShown: true, title: "Fitur Siklus Haid" }}
             />
-            <Stack.Screen name="Pregnancy" component={PregnancyScreen} />
-            <Stack.Screen name="Immunization" component={ImmunizationScreen} />
+            <Stack.Screen
+              name="Pregnancy"
+              component={PregnancyScreen}
+              options={{ headerShown: true, headerTitle: "Fitur Kehamilan" }}
+            />
+            <Stack.Screen
+              name="Immunization"
+              component={ImmunizationScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "Jadwal Imunisasi Anak",
+              }}
+            />
             <Stack.Screen
               name="PregnancyPlan"
               component={PregnancyPlanScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "Program Kehamilan",
+              }}
             />
-            <Stack.Screen name="Pranikah" component={PranikahScreen} />
+            <Stack.Screen
+              name="Pranikah"
+              component={PranikahScreen}
+              options={{ headerShown: true, headerTitle: "Fitur Pranikah" }}
+            />
             <Stack.Screen
               name="PranikahDetail"
               component={PranikahDetailScreen}
+              options={{ headerShown: true, headerTitle: "Fitur Pranikah" }}
             />
             <Stack.Screen name="Edukasi" component={EdukasiScreen} />
             <Stack.Screen
               name="EdukasiDetail"
               component={EdukasiDetailScreen}
             />
-            <Stack.Screen name="GrowthChart" component={GrowthChartScreen} />
-            <Stack.Screen name="KB" component={KBScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen
+              name="GrowthChart"
+              component={GrowthChartScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "Tumbuh Kembang Anak",
+              }}
+            />
+            <Stack.Screen
+              name="KB"
+              component={KBScreen}
+              options={{ headerShown: true, headerTitle: "Simulasi Metode KB" }}
+            />
+            <Stack.Screen
+              name="Profile"
+              component={ProfileScreen}
+              options={{ headerShown: true, headerTitle: "Profil Pengguna" }}
+            />
             <Stack.Screen
               name="BMICalculator"
               component={BMICalculatorScreen}
@@ -159,9 +213,20 @@ export default function Navigation() {
             <Stack.Screen
               name="WaterCalculator"
               component={WaterCalculatorScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "Kebutuhan Air Harian",
+              }}
             />
             <Stack.Screen name="ChecklistScreen" component={ChecklistScreen} />
-            <Stack.Screen name="MoodTracker" component={MoodTrackerScreen} />
+            <Stack.Screen
+              name="MoodTracker"
+              component={MoodTrackerScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "Mood Tracker Harian",
+              }}
+            />
             {/* Tambah screen lain di sini nanti */}
           </>
         )}

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
-import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 export default function KBScreen() {
   const [statusMenikah, setStatusMenikah] = useState("sudah");
@@ -41,84 +48,90 @@ export default function KBScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Simulasi Metode KB</Text>
+    <ScrollView contentContainerStyle={styles.scrollContent}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Simulasi Metode KB</Text>
 
-      <Text style={styles.label}>Status Menikah:</Text>
-      <Picker
-        selectedValue={statusMenikah}
-        onValueChange={setStatusMenikah}
-        style={styles.picker}
-      >
-        <Picker.Item label="Sudah" value="sudah" />
-        <Picker.Item label="Belum" value="belum" />
-      </Picker>
+        <Text style={styles.label}>Status Menikah:</Text>
+        <Picker
+          selectedValue={statusMenikah}
+          onValueChange={setStatusMenikah}
+          style={styles.picker}
+        >
+          <Picker.Item label="Sudah" value="sudah" />
+          <Picker.Item label="Belum" value="belum" />
+        </Picker>
 
-      <Text style={styles.label}>Ingin Punya Anak Lagi?</Text>
-      <Picker
-        selectedValue={inginAnak}
-        onValueChange={setInginAnak}
-        style={styles.picker}
-      >
-        <Picker.Item label="Tidak" value="tidak" />
-        <Picker.Item label="Ya" value="ya" />
-      </Picker>
+        <Text style={styles.label}>Ingin Punya Anak Lagi?</Text>
+        <Picker
+          selectedValue={inginAnak}
+          onValueChange={setInginAnak}
+          style={styles.picker}
+        >
+          <Picker.Item label="Tidak" value="tidak" />
+          <Picker.Item label="Ya" value="ya" />
+        </Picker>
 
-      <Text style={styles.label}>Frekuensi Hubungan:</Text>
-      <Picker
-        selectedValue={frekuensi}
-        onValueChange={setFrekuensi}
-        style={styles.picker}
-      >
-        <Picker.Item label="Rutin" value="rutin" />
-        <Picker.Item label="Kadang" value="kadang" />
-        <Picker.Item label="Jarang" value="jarang" />
-      </Picker>
+        <Text style={styles.label}>Frekuensi Hubungan:</Text>
+        <Picker
+          selectedValue={frekuensi}
+          onValueChange={setFrekuensi}
+          style={styles.picker}
+        >
+          <Picker.Item label="Rutin" value="rutin" />
+          <Picker.Item label="Kadang" value="kadang" />
+          <Picker.Item label="Jarang" value="jarang" />
+        </Picker>
 
-      <Text style={styles.label}>Preferensi Metode:</Text>
-      <Picker
-        selectedValue={preferensi}
-        onValueChange={setPreferensi}
-        style={styles.picker}
-      >
-        <Picker.Item label="Tanpa Hormon" value="tanpa_hormon" />
-        <Picker.Item label="Jangka Panjang" value="jangka_panjang" />
-        <Picker.Item
-          label="Ingin Cepat Hamil Setelah Stop"
-          value="cepat_hamil"
-        />
-      </Picker>
+        <Text style={styles.label}>Preferensi Metode:</Text>
+        <Picker
+          selectedValue={preferensi}
+          onValueChange={setPreferensi}
+          style={styles.picker}
+        >
+          <Picker.Item label="Tanpa Hormon" value="tanpa_hormon" />
+          <Picker.Item label="Jangka Panjang" value="jangka_panjang" />
+          <Picker.Item
+            label="Ingin Cepat Hamil Setelah Stop"
+            value="cepat_hamil"
+          />
+        </Picker>
 
-      <Text style={styles.label}>Riwayat Kesehatan:</Text>
-      <Picker
-        selectedValue={riwayat}
-        onValueChange={setRiwayat}
-        style={styles.picker}
-      >
-        <Picker.Item label="Normal" value="normal" />
-        <Picker.Item label="Menyusui" value="menyusui" />
-        <Picker.Item label="Hipertensi / Risiko Lain" value="risiko" />
-      </Picker>
+        <Text style={styles.label}>Riwayat Kesehatan:</Text>
+        <Picker
+          selectedValue={riwayat}
+          onValueChange={setRiwayat}
+          style={styles.picker}
+        >
+          <Picker.Item label="Normal" value="normal" />
+          <Picker.Item label="Menyusui" value="menyusui" />
+          <Picker.Item label="Hipertensi / Risiko Lain" value="risiko" />
+        </Picker>
 
-      <View style={{ marginVertical: 20 }}>
-        <Button title="Simulasikan" onPress={simulasikan} />
+        <TouchableOpacity style={styles.button} onPress={simulasikan}>
+          <Text style={styles.buttonText}>Simulasikan</Text>
+        </TouchableOpacity>
+
+        {hasil && (
+          <View style={styles.resultBox}>
+            <Text style={styles.resultTitle}>Rekomendasi:</Text>
+            <Text style={styles.resultMethod}>{hasil.metode}</Text>
+            <Text style={styles.resultDesc}>{hasil.penjelasan}</Text>
+          </View>
+        )}
       </View>
-
-      {hasil && (
-        <View style={styles.resultBox}>
-          <Text style={styles.resultTitle}>Rekomendasi:</Text>
-          <Text style={styles.resultMethod}>{hasil.metode}</Text>
-          <Text style={styles.resultDesc}>{hasil.penjelasan}</Text>
-        </View>
-      )}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContent: {
+    padding: 24,
+    paddingBottom: "40%",
+    backgroundColor: "#fffafc",
+  },
   container: {
     flex: 1,
-    padding: 24,
   },
   title: {
     fontSize: 20,
@@ -126,18 +139,43 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    marginTop: 10,
+    marginTop: 14,
+    marginBottom: 4,
     fontWeight: "500",
+    color: "#444",
   },
   picker: {
-    backgroundColor: "#f0f0f0",
-    borderRadius: 6,
-    color: "gray",
+    backgroundColor: "#fdf6f9",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#fe61ad40",
+    marginBottom: 8,
+    color: "#444",
+  },
+  button: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   resultBox: {
-    backgroundColor: "#f0f9f0",
+    backgroundColor: "#fff0f5",
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fe61ad30",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+    marginTop: 10,
   },
   resultTitle: {
     fontWeight: "bold",
@@ -145,8 +183,9 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   resultMethod: {
-    fontSize: 16,
-    color: "#006400",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fe61ad",
     marginBottom: 6,
   },
   resultDesc: {

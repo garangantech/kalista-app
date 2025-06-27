@@ -8,9 +8,12 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
+  TouchableOpacity,
+  Platform,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LineChart } from "react-native-chart-kit";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -19,6 +22,7 @@ export default function GrowthChartScreen() {
   const [date, setDate] = useState("");
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -27,6 +31,17 @@ export default function GrowthChartScreen() {
     };
     load();
   }, []);
+
+  const formatDateIndo = (dateStr) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    return new Intl.DateTimeFormat("id-ID", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  };
 
   const handleAdd = async () => {
     if (!date || !weight || !height) return;
@@ -66,33 +81,52 @@ export default function GrowthChartScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: "40%" }}
+    >
       <Text style={styles.title}>Tumbuh Kembang Anak</Text>
 
-      <TextInput
-        placeholder="Tanggal (YYYY-MM-DD)"
-        placeholderTextColor="gray"
-        style={styles.input}
-        value={date}
-        onChangeText={setDate}
-      />
-      <TextInput
-        placeholder="Berat (kg)"
-        placeholderTextColor="gray"
-        style={styles.input}
-        value={weight}
-        keyboardType="decimal-pad"
-        onChangeText={setWeight}
-      />
-      <TextInput
-        placeholder="Tinggi (cm)"
-        placeholderTextColor="gray"
-        style={styles.input}
-        value={height}
-        keyboardType="decimal-pad"
-        onChangeText={setHeight}
-      />
-      <Button title="Tambah Data" onPress={handleAdd} />
+      <View style={styles.formContainer}>
+        <TouchableOpacity
+          onPress={() => setShowDatePicker(true)}
+          style={styles.dateBox}
+        >
+          <Text>{formatDateIndo(date)}</Text>
+        </TouchableOpacity>
+        {showDatePicker && (
+          <DateTimePicker
+            mode="date"
+            value={date ? new Date(date) : new Date()}
+            display={Platform.OS === "ios" ? "spinner" : "default"}
+            onChange={(event, selectedDate) => {
+              setShowDatePicker(false);
+              if (selectedDate) {
+                setDate(selectedDate.toISOString().split("T")[0]);
+              }
+            }}
+          />
+        )}
+        <TextInput
+          placeholder="Berat (kg)"
+          placeholderTextColor="#999"
+          style={styles.input}
+          value={weight}
+          keyboardType="decimal-pad"
+          onChangeText={setWeight}
+        />
+        <TextInput
+          placeholder="Tinggi (cm)"
+          placeholderTextColor="#999"
+          style={styles.input}
+          value={height}
+          keyboardType="decimal-pad"
+          onChangeText={setHeight}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleAdd}>
+          <Text style={styles.buttonText}>Tambah Data</Text>
+        </TouchableOpacity>
+      </View>
 
       {data.length > 0 && (
         <>
@@ -131,30 +165,50 @@ const chartConfig = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  input: {
+  formContainer: {
+    backgroundColor: "#fff0f5",
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 24,
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 6,
-    padding: 10,
-    marginBottom: 12,
+    borderColor: "#fe61ad30",
   },
-  chartTitle: {
-    marginTop: 24,
+  button: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 6,
+  },
+  buttonText: {
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
-    marginBottom: 8,
   },
-  chart: {
-    borderRadius: 12,
-    marginBottom: 16,
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fe61ad",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  chartTitle: {
+    marginTop: 16,
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#333",
+  },
+  container: {
+    padding: 20,
+    backgroundColor: "#fffafc",
+    paddingBottom: 100,
+  },
+  dateBox: {
+    padding: 12,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    marginBottom: 12,
+    backgroundColor: "#fdf6f9",
   },
 });

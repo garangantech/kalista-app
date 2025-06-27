@@ -3,10 +3,10 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Alert,
   TouchableOpacity,
+  ScrollView,
   Platform,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -28,7 +28,6 @@ export default function ProfileScreen() {
         console.log("❌ Gagal muat profil:", e);
       }
     };
-
     loadProfile();
   }, []);
 
@@ -55,7 +54,7 @@ export default function ProfileScreen() {
       const iso = selectedDate.toISOString();
       handleChange(datePickerKey, iso);
     }
-    setDatePickerKey(null); // tutup date picker
+    setDatePickerKey(null);
   };
 
   const renderField = (label, key, isDate = false) => {
@@ -64,7 +63,7 @@ export default function ProfileScreen() {
 
     return (
       <View style={styles.field}>
-        <Text style={styles.label}>{label}:</Text>
+        <Text style={styles.label}>{label}</Text>
         {isEditing ? (
           isDateField ? (
             <TouchableOpacity
@@ -92,7 +91,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <Text style={styles.title}>Profil Pengguna</Text>
 
       {renderField("Nama", "name")}
@@ -117,47 +116,82 @@ export default function ProfileScreen() {
 
       <View style={{ marginTop: 20 }}>
         {isEditing ? (
-          <Button title="Simpan" onPress={handleSave} />
+          <TouchableOpacity style={styles.button} onPress={handleSave}>
+            <Text style={styles.buttonText}>Simpan</Text>
+          </TouchableOpacity>
         ) : (
-          <Button title="Edit Profil" onPress={() => setIsEditing(true)} />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setIsEditing(true)}
+          >
+            <Text style={styles.buttonText}>Edit Profil</Text>
+          </TouchableOpacity>
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollContainer: {
     padding: 24,
+    backgroundColor: "#fffafc",
+    paddingBottom: 100,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
+    color: "#fe61ad",
     marginBottom: 24,
+    textAlign: "center",
   },
   field: {
-    marginBottom: 14,
+    marginBottom: 16,
+    backgroundColor: "#fff0f5",
+    padding: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fe61ad20",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   label: {
     fontSize: 14,
     fontWeight: "600",
-    marginBottom: 4,
+    color: "#444",
+    marginBottom: 6,
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#fe61ad50",
     padding: 10,
-    borderRadius: 6,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    fontSize: 15,
+  },
+  dateButton: {
+    padding: 10,
+    backgroundColor: "#fff",
+    borderColor: "#fe61ad30",
+    borderWidth: 1,
+    borderRadius: 8,
   },
   value: {
     fontSize: 15,
     color: "#333",
-    paddingVertical: 4,
   },
-  dateButton: {
-    padding: 10,
-    backgroundColor: "#eee",
-    borderRadius: 6,
+  button: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });

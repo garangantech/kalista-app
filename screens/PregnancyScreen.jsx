@@ -69,7 +69,9 @@ export default function PregnancyScreen() {
         />
       )}
 
-      <Button title="Simpan & Hitung" onPress={handleSave} />
+      <TouchableOpacity style={styles.button} onPress={handleSave}>
+        <Text style={styles.buttonText}>Simpan & Hitung</Text>
+      </TouchableOpacity>
 
       {ageInWeeks !== null && (
         <View style={styles.result}>
@@ -94,16 +96,36 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   dateBox: {
-    padding: 10,
-    backgroundColor: "#eee",
-    borderRadius: 6,
-    marginVertical: 10,
+    backgroundColor: "#fdf6f9",
+    padding: 12,
+    borderRadius: 10,
+    marginVertical: 12,
+    elevation: 1,
+  },
+  button: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   result: {
     marginTop: 24,
     padding: 16,
-    backgroundColor: "#F0F4F8",
-    borderRadius: 8,
+    backgroundColor: "#ffeef5",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#fe61ad40",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 1,
   },
   resultTitle: {
     fontWeight: "bold",

@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   FlatList,
   StyleSheet,
   TouchableOpacity,
@@ -14,6 +13,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { scheduleNotification } from "../services/NotificationService";
 
 export default function ImmunizationScreen() {
+  const [age, setAge] = useState(""); // umur dalam bulan
+  const [recommendations, setRecommendations] = useState([]);
   const [name, setName] = useState("");
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
@@ -28,6 +29,26 @@ export default function ImmunizationScreen() {
     };
     loadData();
   }, []);
+
+  const getRecommendation = (months) => {
+    if (months < 1) return ["HB-0"];
+    if (months <= 2) return ["BCG", "Polio 1", "DPT 1"];
+    if (months <= 4) return ["DPT 2", "Polio 2"];
+    if (months <= 6) return ["DPT 3", "Polio 3", "Hepatitis B"];
+    if (months <= 9) return ["Campak"];
+    if (months <= 18) return ["DPT Booster", "Polio Booster"];
+    return ["Cek ulang ke posyandu"];
+  };
+
+  useEffect(() => {
+    const bulan = parseInt(age);
+    if (!isNaN(bulan)) {
+      const list = getRecommendation(bulan);
+      setRecommendations(list);
+    } else {
+      setRecommendations([]);
+    }
+  }, [age]);
 
   const saveList = async (newList) => {
     setList(newList);
@@ -104,6 +125,34 @@ export default function ImmunizationScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Jadwal Imunisasi Anak</Text>
 
+      <Text>Umur Anak (bulan):</Text>
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        placeholder="Contoh: 2"
+        value={age}
+        onChangeText={setAge}
+      />
+
+      {recommendations.length > 0 && (
+        <View style={{ marginVertical: 10 }}>
+          <Text style={{ fontWeight: "bold", marginBottom: 6 }}>
+            Rekomendasi Imunisasi:
+          </Text>
+          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            {recommendations.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.chip}
+                onPress={() => setName(item)}
+              >
+                <Text style={styles.chipText}>{item}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      )}
+
       <Text>Nama Imunisasi:</Text>
       <TextInput
         style={styles.input}
@@ -132,7 +181,9 @@ export default function ImmunizationScreen() {
         />
       )}
 
-      <Button title="Tambah Jadwal" onPress={addItem} />
+      <TouchableOpacity style={styles.addButton} onPress={addItem}>
+        <Text style={styles.addButtonText}>+ Tambah Jadwal</Text>
+      </TouchableOpacity>
 
       <FlatList
         style={{ marginTop: 24 }}
@@ -154,18 +205,51 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
   },
-  input: {
+  chip: {
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 18,
+    backgroundColor: "#ffe6f0",
+    borderColor: "#fe61ad",
     borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    marginVertical: 8,
-    borderRadius: 6,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  chipText: {
+    fontSize: 13,
+    color: "#fe61ad",
+    fontWeight: "500",
+  },
+  input: {
+    borderWidth: 0,
+    backgroundColor: "#fdf6f9",
+    padding: 12,
+    borderRadius: 10,
+    marginBottom: 12,
+    shadowColor: "#ccc",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 1,
   },
   dateBox: {
-    padding: 10,
-    backgroundColor: "#eee",
-    marginBottom: 10,
-    borderRadius: 6,
+    padding: 12,
+    backgroundColor: "#fdf6f9",
+    borderRadius: 10,
+    marginBottom: 12,
+    elevation: 1,
+  },
+  addButton: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  addButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   item: {
     padding: 12,
