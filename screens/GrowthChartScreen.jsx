@@ -92,8 +92,11 @@ export default function GrowthChartScreen() {
           onPress={() => setShowDatePicker(true)}
           style={styles.dateBox}
         >
-          <Text>{formatDateIndo(date)}</Text>
+          <Text style={{ color: date ? "#000" : "#999" }}>
+            {date ? formatDateIndo(date) : "Pilih tanggal pengukuran"}
+          </Text>
         </TouchableOpacity>
+
         {showDatePicker && (
           <DateTimePicker
             mode="date"
@@ -107,6 +110,7 @@ export default function GrowthChartScreen() {
             }}
           />
         )}
+
         <TextInput
           placeholder="Berat (kg)"
           placeholderTextColor="#999"
@@ -115,6 +119,7 @@ export default function GrowthChartScreen() {
           keyboardType="decimal-pad"
           onChangeText={setWeight}
         />
+
         <TextInput
           placeholder="Tinggi (cm)"
           placeholderTextColor="#999"
@@ -123,6 +128,7 @@ export default function GrowthChartScreen() {
           keyboardType="decimal-pad"
           onChangeText={setHeight}
         />
+
         <TouchableOpacity style={styles.button} onPress={handleAdd}>
           <Text style={styles.buttonText}>Tambah Data</Text>
         </TouchableOpacity>
@@ -210,5 +216,14 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     marginBottom: 12,
     backgroundColor: "#fdf6f9",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "#fff",
+    borderRadius: 6,
+    padding: 12,
+    marginBottom: 12,
+    fontSize: 15,
   },
 });

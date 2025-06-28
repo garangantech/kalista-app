@@ -33,6 +33,15 @@ export default function PregnancyPlanScreen() {
     load();
   }, []);
 
+  const formatTanggalIndonesia = (date) => {
+    return new Intl.DateTimeFormat("id-ID", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(date));
+  };
+
   const save = async () => {
     const data = {
       lastPeriod: lastPeriod.toISOString(),
@@ -44,17 +53,17 @@ export default function PregnancyPlanScreen() {
 
   const calculateFertility = (periodDate, cycle) => {
     const ovulation = new Date(periodDate);
-    ovulation.setDate(ovulation.getDate() + (cycle - 14)); // ovulasi 14 hari sebelum haid berikutnya
+    ovulation.setDate(ovulation.getDate() + (cycle - 14));
 
     const fertileStart = new Date(ovulation);
     fertileStart.setDate(ovulation.getDate() - 5);
 
     setFertileWindow({
-      from: fertileStart.toDateString(),
-      to: ovulation.toDateString(),
+      from: formatTanggalIndonesia(fertileStart),
+      to: formatTanggalIndonesia(ovulation),
     });
 
-    setOvulationDay(ovulation.toDateString());
+    setOvulationDay(formatTanggalIndonesia(ovulation));
   };
 
   return (
@@ -66,7 +75,7 @@ export default function PregnancyPlanScreen() {
         style={styles.dateBox}
         onPress={() => setShowPicker(true)}
       >
-        <Text>{lastPeriod.toDateString()}</Text>
+        <Text>{formatTanggalIndonesia(lastPeriod)}</Text>
       </TouchableOpacity>
 
       {showPicker && (

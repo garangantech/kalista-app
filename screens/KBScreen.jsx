@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
+import { Ionicons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -53,60 +54,100 @@ export default function KBScreen() {
         <Text style={styles.title}>Simulasi Metode KB</Text>
 
         <Text style={styles.label}>Status Menikah:</Text>
-        <Picker
-          selectedValue={statusMenikah}
-          onValueChange={setStatusMenikah}
-          style={styles.picker}
-        >
-          <Picker.Item label="Sudah" value="sudah" />
-          <Picker.Item label="Belum" value="belum" />
-        </Picker>
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={statusMenikah}
+            onValueChange={setStatusMenikah}
+            style={styles.picker}
+          >
+            <Picker.Item label="Sudah" value="sudah" />
+            <Picker.Item label="Belum" value="belum" />
+          </Picker>
+          <Ionicons
+            name="chevron-down"
+            size={20}
+            color="#888"
+            style={styles.dropdownIcon}
+          />
+        </View>
 
         <Text style={styles.label}>Ingin Punya Anak Lagi?</Text>
-        <Picker
-          selectedValue={inginAnak}
-          onValueChange={setInginAnak}
-          style={styles.picker}
-        >
-          <Picker.Item label="Tidak" value="tidak" />
-          <Picker.Item label="Ya" value="ya" />
-        </Picker>
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={inginAnak}
+            onValueChange={setInginAnak}
+            style={styles.picker}
+          >
+            <Picker.Item label="Tidak" value="tidak" />
+            <Picker.Item label="Ya" value="ya" />
+          </Picker>
+          <Ionicons
+            name="chevron-down"
+            size={20}
+            color="#888"
+            style={styles.dropdownIcon}
+          />
+        </View>
 
         <Text style={styles.label}>Frekuensi Hubungan:</Text>
-        <Picker
-          selectedValue={frekuensi}
-          onValueChange={setFrekuensi}
-          style={styles.picker}
-        >
-          <Picker.Item label="Rutin" value="rutin" />
-          <Picker.Item label="Kadang" value="kadang" />
-          <Picker.Item label="Jarang" value="jarang" />
-        </Picker>
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={frekuensi}
+            onValueChange={setFrekuensi}
+            style={styles.picker}
+          >
+            <Picker.Item label="Rutin" value="rutin" />
+            <Picker.Item label="Kadang" value="kadang" />
+            <Picker.Item label="Jarang" value="jarang" />
+          </Picker>
+          <Ionicons
+            name="chevron-down"
+            size={20}
+            color="#888"
+            style={styles.dropdownIcon}
+          />
+        </View>
 
         <Text style={styles.label}>Preferensi Metode:</Text>
-        <Picker
-          selectedValue={preferensi}
-          onValueChange={setPreferensi}
-          style={styles.picker}
-        >
-          <Picker.Item label="Tanpa Hormon" value="tanpa_hormon" />
-          <Picker.Item label="Jangka Panjang" value="jangka_panjang" />
-          <Picker.Item
-            label="Ingin Cepat Hamil Setelah Stop"
-            value="cepat_hamil"
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={preferensi}
+            onValueChange={setPreferensi}
+            style={styles.picker}
+          >
+            <Picker.Item label="Tanpa Hormon" value="tanpa_hormon" />
+            <Picker.Item label="Jangka Panjang" value="jangka_panjang" />
+            <Picker.Item
+              label="Ingin Cepat Hamil Setelah Stop"
+              value="cepat_hamil"
+            />
+          </Picker>
+          <Ionicons
+            name="chevron-down"
+            size={20}
+            color="#888"
+            style={styles.dropdownIcon}
           />
-        </Picker>
+        </View>
 
         <Text style={styles.label}>Riwayat Kesehatan:</Text>
-        <Picker
-          selectedValue={riwayat}
-          onValueChange={setRiwayat}
-          style={styles.picker}
-        >
-          <Picker.Item label="Normal" value="normal" />
-          <Picker.Item label="Menyusui" value="menyusui" />
-          <Picker.Item label="Hipertensi / Risiko Lain" value="risiko" />
-        </Picker>
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={riwayat}
+            onValueChange={setRiwayat}
+            style={styles.picker}
+          >
+            <Picker.Item label="Normal" value="normal" />
+            <Picker.Item label="Menyusui" value="menyusui" />
+            <Picker.Item label="Hipertensi / Risiko Lain" value="risiko" />
+          </Picker>
+          <Ionicons
+            name="chevron-down"
+            size={20}
+            color="#888"
+            style={styles.dropdownIcon}
+          />
+        </View>
 
         <TouchableOpacity style={styles.button} onPress={simulasikan}>
           <Text style={styles.buttonText}>Simulasikan</Text>
@@ -144,14 +185,32 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#444",
   },
-  picker: {
-    backgroundColor: "#fdf6f9",
-    borderRadius: 8,
+  pickerWrapper: {
+    position: "relative",
+    backgroundColor: "#fff",
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#fe61ad40",
-    marginBottom: 8,
-    color: "#444",
+    borderColor: "#ccc",
+    paddingRight: 32,
+    elevation: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
   },
+  picker: {
+    color: "#333",
+    paddingLeft: 12,
+    // paddingVertical: 8,
+  },
+  dropdownIcon: {
+    position: "absolute",
+    right: 10,
+    top: "50%",
+    marginTop: -10,
+    pointerEvents: "none", // biar tidak mengganggu klik
+  },
+
   button: {
     backgroundColor: "#fe61ad",
     paddingVertical: 12,

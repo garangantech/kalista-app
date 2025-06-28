@@ -1,32 +1,56 @@
-import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import pranikahData from "../data/pranikah.json";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import JurnalPribadi from "./pranikah/JurnalPribadiScreen";
+import RefleksiPasangan from "./pranikah/RefleksiPasanganScreen";
+import TesKesiapan from "./pranikah/TesKesiapanScreen";
 
-export default function PranikahScreen({ navigation }) {
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => navigation.navigate("PranikahDetail", { item })}
-    >
-      <Text style={styles.title}>{item.title}</Text>
-    </TouchableOpacity>
-  );
+const quotes = [
+  "Cinta itu memilih tiap hari, bukan sekali seumur hidup.",
+  "Pernikahan yang sehat dimulai dari komunikasi yang jujur.",
+  "Komitmen lebih dari sekadar kata-kata.",
+  "Jangan menikah untuk menjadi bahagia, menikahlah untuk berbagi kebahagiaan.",
+];
+
+export default function PranikahScreen() {
+  const [selected, setSelected] = useState("jurnal");
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Edukasi Pranikah</Text>
-      <FlatList
-        data={pranikahData}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      />
+      <Text style={styles.quote}>"{randomQuote}"</Text>
+
+      <View style={styles.toggleRow}>
+        <TouchableOpacity
+          onPress={() => setSelected("jurnal")}
+          style={[
+            styles.categoryButton,
+            selected === "jurnal" && styles.selected,
+          ]}
+        >
+          <Text style={styles.categoryText}>Jurnal Pribadi</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => setSelected("refleksi")}
+          style={[
+            styles.categoryButton,
+            selected === "refleksi" && styles.selected,
+          ]}
+        >
+          <Text style={styles.categoryText}>Refleksi</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => setSelected("tes")}
+          style={[styles.categoryButton, selected === "tes" && styles.selected]}
+        >
+          <Text style={styles.categoryText}>Tes Kesiapan</Text>
+        </TouchableOpacity>
+      </View>
+
+      {selected === "jurnal" && <JurnalPribadi />}
+      {selected === "refleksi" && <RefleksiPasangan />}
+      {selected === "tes" && <TesKesiapan />}
     </View>
   );
 }
@@ -34,21 +58,33 @@ export default function PranikahScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 20,
+    backgroundColor: "#fff",
   },
-  header: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 16,
+  toggleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 16,
   },
-  card: {
-    backgroundColor: "#F0F4F8",
-    padding: 16,
+  categoryButton: {
+    flex: 1,
+    paddingVertical: 10,
+    marginHorizontal: 4,
     borderRadius: 8,
-    marginBottom: 12,
+    backgroundColor: "#eee",
+    alignItems: "center",
   },
-  title: {
-    fontSize: 16,
+  selected: {
+    backgroundColor: "#fe61ad",
+  },
+  categoryText: {
+    color: "#333",
     fontWeight: "600",
+  },
+  quote: {
+    fontStyle: "italic",
+    textAlign: "center",
+    color: "#666",
+    marginBottom: 12,
   },
 });

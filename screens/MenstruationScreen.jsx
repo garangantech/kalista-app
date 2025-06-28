@@ -37,6 +37,15 @@ export default function MenstruationScreen() {
     loadData();
   }, []);
 
+  const formatTanggalIndonesia = (date) => {
+    return new Intl.DateTimeFormat("id-ID", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(date);
+  };
+
   const saveData = async () => {
     const dur = parseInt(duration);
     const cyc = parseInt(cycle);
@@ -85,10 +94,12 @@ export default function MenstruationScreen() {
     pmsStart.setDate(pmsStart.getDate() - 5);
 
     setPredictions({
-      nextPeriod: nextPeriod.toDateString(),
-      fertileRange: `${fertileStart.toDateString()} - ${fertileEnd.toDateString()}`,
-      ovulation: ovulation.toDateString(),
-      pms: pmsStart.toDateString(),
+      nextPeriod: formatTanggalIndonesia(nextPeriod),
+      fertileRange: `${formatTanggalIndonesia(
+        fertileStart
+      )} - ${formatTanggalIndonesia(fertileEnd)}`,
+      ovulation: formatTanggalIndonesia(ovulation),
+      pms: formatTanggalIndonesia(pmsStart),
     });
   };
 
@@ -101,7 +112,7 @@ export default function MenstruationScreen() {
         style={styles.dateBox}
         onPress={() => setShowPicker(true)}
       >
-        <Text>{lastPeriod.toDateString()}</Text>
+        <Text>{formatTanggalIndonesia(lastPeriod)}</Text>
       </TouchableOpacity>
 
       {showPicker && (
@@ -162,7 +173,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    backgroundColor: "#fdf6f9",
+    backgroundColor: "#fff",
     borderWidth: 0,
     padding: 12,
     borderRadius: 10,

@@ -94,8 +94,6 @@ export default function ChecklistScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Checklist Persiapan</Text>
-
       <View style={styles.toggleRow}>
         <TouchableOpacity
           onPress={() => setSelectedCategory("melahirkan")}

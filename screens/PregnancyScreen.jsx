@@ -19,9 +19,17 @@ export default function PregnancyScreen() {
         calculatePregnancy(hplDate);
       }
     };
-
     loadData();
   }, []);
+
+  const formatTanggalIndonesia = (date) => {
+    return new Intl.DateTimeFormat("id-ID", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(date);
+  };
 
   const handleSave = async () => {
     await AsyncStorage.setItem(
@@ -54,7 +62,7 @@ export default function PregnancyScreen() {
         style={styles.dateBox}
         onPress={() => setShowPicker(true)}
       >
-        <Text>{hpl ? hpl.toDateString() : "Pilih Tanggal"}</Text>
+        <Text>{hpl ? formatTanggalIndonesia(hpl) : "Pilih Tanggal"}</Text>
       </TouchableOpacity>
 
       {showPicker && (
@@ -78,7 +86,7 @@ export default function PregnancyScreen() {
           <Text style={styles.resultTitle}>Hasil Perhitungan:</Text>
           <Text>Usia Kehamilan: Minggu ke-{ageInWeeks}</Text>
           <Text>Trimester: {trimester}</Text>
-          <Text>HPL: {hpl.toDateString()}</Text>
+          <Text>HPL: {formatTanggalIndonesia(hpl)}</Text>
         </View>
       )}
     </View>
@@ -96,7 +104,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   dateBox: {
-    backgroundColor: "#fdf6f9",
+    backgroundColor: "#fff",
     padding: 12,
     borderRadius: 10,
     marginVertical: 12,

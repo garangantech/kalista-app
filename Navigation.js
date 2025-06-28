@@ -80,7 +80,9 @@ function MainTabs({ navigation }) {
         options={{
           headerTitle: () => (
             <TouchableOpacity
-              onPress={() => console.log("tombol ditekan")}
+              onPress={() =>
+                navigation.navigate("MainTabs", { screen: "Home" })
+              }
               style={{
                 flex: 1,
                 flexDirection: "row",
@@ -100,7 +102,9 @@ function MainTabs({ navigation }) {
         options={{
           headerTitle: () => (
             <TouchableOpacity
-              onPress={() => console.log("tombol ditekan")}
+              onPress={() =>
+                navigation.navigate("MainTabs", { screen: "Home" })
+              }
               style={{
                 flex: 1,
                 flexDirection: "row",
@@ -117,7 +121,24 @@ function MainTabs({ navigation }) {
       <Tab.Screen
         name="About"
         component={AboutScreen}
-        options={{ headerShown: true, headerTitle: "Tentang Aplikasi" }}
+        options={{
+          headerTitle: () => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("MainTabs", { screen: "Home" })
+              }
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 20,
+              }}
+            >
+              <Ionicons name="arrow-back" size={24} />
+              <Text style={{ fontSize: 20 }}>Tentang Aplikasi</Text>
+            </TouchableOpacity>
+          ),
+        }}
       />
     </Tab.Navigator>
   );
@@ -210,7 +231,7 @@ export default function Navigation() {
             <Stack.Screen
               name="KB"
               component={KBScreen}
-              options={{ headerShown: true, headerTitle: "Simulasi Metode KB" }}
+              options={{ headerShown: true, headerTitle: "Simulasi KB" }}
             />
             <Stack.Screen
               name="Profile"
@@ -220,6 +241,10 @@ export default function Navigation() {
             <Stack.Screen
               name="BMICalculator"
               component={BMICalculatorScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "BMI (BodyMass Index)",
+              }}
             />
             <Stack.Screen
               name="WaterCalculator"
@@ -229,7 +254,14 @@ export default function Navigation() {
                 headerTitle: "Kebutuhan Air Harian",
               }}
             />
-            <Stack.Screen name="ChecklistScreen" component={ChecklistScreen} />
+            <Stack.Screen
+              name="ChecklistScreen"
+              component={ChecklistScreen}
+              options={{
+                headerShown: true,
+                headerTitle: "Checklist Persiapan",
+              }}
+            />
             <Stack.Screen
               name="MoodTracker"
               component={MoodTrackerScreen}
