@@ -31,6 +31,8 @@ import BMICalculatorScreen from "./screens/BMICalculatorScreen";
 import WaterCalculatorScreen from "./screens/WaterCalculatorScreen";
 import ChecklistScreen from "./screens/ChecklistScreen";
 import MoodTrackerScreen from "./screens/MoodTrackerScreen";
+import NotificationScreen from "./screens/NotificationScreen";
+import AboutScreen from "./screens/AboutScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -94,7 +96,7 @@ function MainTabs({ navigation }) {
       />
       <Tab.Screen
         name="Notif"
-        component={ProfileScreen}
+        component={NotificationScreen}
         options={{
           headerTitle: () => (
             <TouchableOpacity
@@ -112,7 +114,11 @@ function MainTabs({ navigation }) {
           ),
         }}
       />
-      <Tab.Screen name="About" component={MenuScreen} />
+      <Tab.Screen
+        name="About"
+        component={AboutScreen}
+        options={{ headerShown: true, headerTitle: "Tentang Aplikasi" }}
+      />
     </Tab.Navigator>
   );
 }
