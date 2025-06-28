@@ -80,13 +80,6 @@ export default function DashboardScreen({ navigation }) {
     },
   ];
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.card} onPress={item.onPress}>
-      <Ionicons name={item.icon} size={30} color="#fe61ad" />
-      <Text style={styles.label}>{item.label}</Text>
-    </TouchableOpacity>
-  );
-
   return (
     <ScrollView
       showsHorizontalScrollIndicator={true}
@@ -115,6 +108,7 @@ export default function DashboardScreen({ navigation }) {
             key={item.id}
             title={item.title}
             category={item.category}
+            onPress={() => navigation.navigate("EdukasiDetail", { item })}
             image={
               imageMap[item.image] || require("../assets/img-education/1.png")
             }

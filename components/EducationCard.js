@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function EducationCard({ title, subtitle, category, image }) {
+export default function EducationCard({ title, category, image, onPress }) {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity onPress={onPress} style={styles.card}>
       <Image source={image} style={styles.image} resizeMode="cover" />
       <View style={styles.textContainer}>
         <Text style={styles.category} numberOfLines={1} ellipsizeMode="tail">
@@ -14,7 +14,7 @@ export default function EducationCard({ title, subtitle, category, image }) {
           {title}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
