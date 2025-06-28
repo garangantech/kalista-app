@@ -12,7 +12,6 @@ import edukasiData from "../data/edukasi.json";
 const imageMap = {
   "1.png": require("../assets/img-education/1.png"),
   "2.png": require("../assets/img-education/2.png"),
-  "default.png": require("../assets/pregnant.png"), // optional fallback
 };
 
 export default function EdukasiScreen({ navigation }) {
