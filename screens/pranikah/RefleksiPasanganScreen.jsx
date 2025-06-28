@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -73,7 +74,7 @@ export default function RefleksiPasanganScreen() {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <Text style={styles.title}>Refleksi Pasangan</Text>
 
       <Text style={styles.label}>Pertanyaan Refleksi:</Text>
@@ -99,19 +100,38 @@ export default function RefleksiPasanganScreen() {
         <Text style={styles.btnText}>Simpan Refleksi</Text>
       </TouchableOpacity>
 
-      <FlatList
-        data={list}
-        keyExtractor={(_, i) => i.toString()}
-        renderItem={renderItem}
-        style={{ marginTop: 24 }}
-      />
-    </View>
+      <View style={{ marginTop: 24 }}>
+        {list.map((item, i) => (
+          <View key={i} style={styles.item}>
+            <Text style={styles.date}>
+              {new Date(item.date).toLocaleDateString("id-ID", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </Text>
+            <Text style={styles.q}>Q: {item.question}</Text>
+            <Text style={styles.a}>A: {item.answer}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, backgroundColor: "#fff" },
-  title: { fontSize: 20, fontWeight: "bold", marginBottom: 16 },
+  content: {
+    padding: 16,
+    paddingBottom: 40,
+  },
+  container: { flex: 1, backgroundColor: "#fff" },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 16,
+    color: "#fe61ad",
+  },
   label: { fontWeight: "600", marginBottom: 8 },
   qItem: {
     padding: 10,

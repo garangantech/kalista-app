@@ -122,13 +122,14 @@ export default function TesKesiapanScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
     backgroundColor: "#fff",
+    paddingBottom: "40%",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#fe61ad",
   },
   questionBox: {
     marginBottom: 20,

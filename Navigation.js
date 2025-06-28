@@ -33,7 +33,9 @@ import ChecklistScreen from "./screens/ChecklistScreen";
 import MoodTrackerScreen from "./screens/MoodTrackerScreen";
 import NotificationScreen from "./screens/NotificationScreen";
 import AboutScreen from "./screens/AboutScreen";
+import { createNavigationContainerRef } from "@react-navigation/native";
 
+export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -146,7 +148,9 @@ function MainTabs({ navigation }) {
 
 export default function Navigation() {
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTimeUser, setFirstTimeUser] = useState(true);
+  const [firstTimeUser, setFirstTimeUser] = useState(false);
+  const [appKey, setAppKey] = useState(0);
+  const [reloadFlag, setReloadFlag] = useState(0);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -162,18 +166,30 @@ export default function Navigation() {
       setIsLoading(false);
     };
     checkUser();
+  }, [reloadFlag]);
+
+  useEffect(() => {
+    const unsubscribe = navigationRef?.addListener("state", () => {
+      const reload = navigationRef.getCurrentRoute()?.params?.reload;
+      if (reload) {
+        setReloadFlag((prev) => prev + 1); // trigger reload
+      }
+    });
+
+    return unsubscribe;
   }, []);
 
   if (isLoading) return null; // Bisa ditambahkan splash/loading screen
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef} key={appKey}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {firstTimeUser ? (
           <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         ) : (
           <>
             <Stack.Screen name="MainTabs" component={MainTabs} />
+
             <Stack.Screen
               name="Menstruation"
               component={MenstruationScreen}

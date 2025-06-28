@@ -12,7 +12,6 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
-
 export default function App() {
   useEffect(() => {
     const setupNotifications = async () => {

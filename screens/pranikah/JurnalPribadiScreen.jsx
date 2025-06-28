@@ -12,10 +12,13 @@ import {
   Button,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native";
 
 const emojis = ["😊", "😐", "😞", "🥰", "😠", "😭"];
 
 export default function JurnalPribadiScreen() {
+  const navigation = useNavigation();
   const [entry, setEntry] = useState("");
   const [emoji, setEmoji] = useState(null);
   const [list, setList] = useState([]);
@@ -126,14 +129,35 @@ export default function JurnalPribadiScreen() {
       >
         <Text style={styles.addButtonText}>+ Tambah Jurnal</Text>
       </TouchableOpacity>
-
-      <FlatList
-        data={list}
-        keyExtractor={(_, i) => i.toString()}
-        renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: 30 }}
-      />
-
+      <ScrollView>
+        <View style={styles.journalWrapper}>
+          <FlatList
+            data={list}
+            keyExtractor={(_, i) => i.toString()}
+            renderItem={renderItem}
+            scrollEnabled={false}
+            ListEmptyComponent={
+              <Text style={{ textAlign: "center", marginTop: 12 }}>
+                Belum ada jurnal
+              </Text>
+            }
+          />
+        </View>
+        <Text style={styles.subheading}>Baca Artikel Pranikah</Text>
+        {pranikahArticles.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            onPress={() => navigation.navigate("EdukasiDetail", { item })}
+          >
+            <View style={styles.articleCard}>
+              <Text style={styles.articleTitle}>{item.title}</Text>
+              <Text style={styles.articleSummary} numberOfLines={2}>
+                {item.summary}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
       <Modal visible={modalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>
@@ -182,7 +206,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 10,
     alignItems: "center",
-    margin: 16,
+    // margin: 16,
   },
   addButtonText: {
     color: "#fff",
@@ -277,5 +301,15 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 12,
     color: "#fe61ad",
+  },
+  journalWrapper: {
+    marginTop: 10,
+    paddingTop: 15,
+    minHeight: 150,
+    // marginHorizontal: 16,
+    paddingBottom: 16,
+    backgroundColor: "#fff",
+    elevation: 5,
+    borderRadius: 10,
   },
 });

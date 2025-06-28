@@ -23,6 +23,7 @@ export default function OnboardingScreen({ navigation }) {
 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePickerType, setDatePickerType] = useState("");
+  const [saving, setSaving] = useState(false);
 
   const onDateChange = (event, selectedDate) => {
     setShowDatePicker(false);
@@ -43,12 +44,10 @@ export default function OnboardingScreen({ navigation }) {
       hasChild,
     };
     await AsyncStorage.setItem("@user_profile", JSON.stringify(userProfile));
-    console.log("Data berhasil disimpan:", userProfile);
+    console.log("✅ Data berhasil disimpan:", userProfile);
 
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "MainTabs" }],
-    }); // masuk ke Home tab setelah selesai
+    // Navigasi ulang ke root untuk trigger useEffect
+    navigation.navigate("Onboarding", { reload: Date.now() });
   };
 
   return (
@@ -70,7 +69,12 @@ export default function OnboardingScreen({ navigation }) {
             <Text>{birthDate.toDateString()}</Text>
           </TouchableOpacity>
 
-          <Button title="Lanjut" onPress={() => setStep(2)} />
+          <TouchableOpacity
+            style={styles.buttonPrimary}
+            onPress={() => setStep(2)}
+          >
+            <Text style={styles.buttonText}>Lanjut</Text>
+          </TouchableOpacity>
         </>
       )}
 
@@ -133,7 +137,12 @@ export default function OnboardingScreen({ navigation }) {
             </TouchableOpacity>
           )}
 
-          <Button title="Lanjut" onPress={() => setStep(3)} />
+          <TouchableOpacity
+            style={styles.buttonPrimary}
+            onPress={() => setStep(3)}
+          >
+            <Text style={styles.buttonText}>Lanjut</Text>
+          </TouchableOpacity>
         </>
       )}
 
@@ -150,7 +159,9 @@ export default function OnboardingScreen({ navigation }) {
           {status === "Orang Tua" && (
             <Text>Punya anak: {hasChild ? "Ya" : "Tidak"}</Text>
           )}
-          <Button title="Simpan dan Mulai" onPress={handleSave} />
+          <TouchableOpacity style={styles.buttonPrimary} onPress={handleSave}>
+            <Text style={styles.buttonText}>Simpan dan Mulai</Text>
+          </TouchableOpacity>
         </>
       )}
 
@@ -169,33 +180,55 @@ export default function OnboardingScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 24,
+    backgroundColor: "#fffafc",
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 16,
+    color: "#fe61ad",
+    marginBottom: 20,
+    textAlign: "center",
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 6,
+    borderColor: "#fe61ad30",
+    padding: 12,
+    marginVertical: 12,
+    borderRadius: 10,
+    backgroundColor: "#fff",
+    fontSize: 16,
   },
   dateButton: {
-    padding: 10,
-    backgroundColor: "#f0f4f8",
-    borderRadius: 6,
+    padding: 12,
+    backgroundColor: "#fdf1f7",
+    borderRadius: 10,
     marginVertical: 10,
+    borderWidth: 1,
+    borderColor: "#fe61ad20",
   },
   option: {
-    padding: 10,
-    backgroundColor: "#eee",
+    padding: 14,
+    backgroundColor: "#f0f0f0",
     marginVertical: 6,
-    borderRadius: 6,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ddd",
   },
   selected: {
-    backgroundColor: "#a4d4ff",
+    backgroundColor: "#feebf4",
+    borderColor: "#fe61ad",
+  },
+  buttonPrimary: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
