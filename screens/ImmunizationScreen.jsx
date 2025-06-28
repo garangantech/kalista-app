@@ -50,6 +50,17 @@ export default function ImmunizationScreen() {
     }
   }, [age]);
 
+  const formatTanggalIndonesia = (dateString) => {
+    const date = new Date(dateString);
+
+    return new Intl.DateTimeFormat("id-ID", {
+      weekday: "short", // Sen, Sel, Rab, dst
+      day: "2-digit", // 01, 02, dst
+      month: "short", // Jan, Feb, dst
+      year: "numeric",
+    }).format(date);
+  };
+
   const saveList = async (newList) => {
     setList(newList);
     await AsyncStorage.setItem("@immunization_data", JSON.stringify(newList));
@@ -103,23 +114,56 @@ export default function ImmunizationScreen() {
     );
   };
 
+  const handleDelete = (index) => {
+    Alert.alert(
+      "Hapus Jadwal",
+      "Apakah kamu yakin ingin menghapus jadwal ini?",
+      [
+        { text: "Batal", style: "cancel" },
+        {
+          text: "Hapus",
+          style: "destructive",
+          onPress: async () => {
+            const updated = [...list];
+            updated.splice(index, 1); // hapus 1 item di index
+            await saveList(updated);
+          },
+        },
+      ]
+    );
+  };
+
   const toggleDone = (index) => {
     const updated = [...list];
     updated[index].done = !updated[index].done;
     saveList(updated);
   };
 
-  const renderItem = ({ item, index }) => (
-    <TouchableOpacity
-      style={[styles.item, item.done && styles.itemDone]}
-      onPress={() => toggleDone(index)}
-    >
-      <Text style={styles.itemText}>
-        {item.name} - {new Date(item.date).toDateString()}
-      </Text>
-      {item.done && <Text style={styles.check}>✓</Text>}
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item, index }) => {
+    const itemStyle = item.done ? [styles.item, styles.itemDone] : styles.item;
+
+    return (
+      <View style={itemStyle}>
+        {/* Teks Jadwal (klik untuk toggle done) */}
+        <TouchableOpacity style={{ flex: 1 }} onPress={() => toggleDone(index)}>
+          <Text style={styles.itemText}>
+            {item.name} - {formatTanggalIndonesia(item.date)}
+          </Text>
+        </TouchableOpacity>
+
+        {/* Area kanan: centang (jika done) + tombol hapus */}
+        <View style={styles.actionArea}>
+          {item.done && <Text style={styles.check}>✓</Text>}
+          <TouchableOpacity
+            onPress={() => handleDelete(index)}
+            style={styles.deleteButton}
+          >
+            <Text style={styles.deleteText}>🗑️</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -166,7 +210,7 @@ export default function ImmunizationScreen() {
         style={styles.dateBox}
         onPress={() => setShowPicker(true)}
       >
-        <Text>{date.toDateString()}</Text>
+        <Text>{formatTanggalIndonesia(date)}</Text>
       </TouchableOpacity>
 
       {showPicker && (
@@ -185,12 +229,15 @@ export default function ImmunizationScreen() {
         <Text style={styles.addButtonText}>+ Tambah Jadwal</Text>
       </TouchableOpacity>
 
-      <FlatList
-        style={{ marginTop: 24 }}
-        data={list}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={renderItem}
-      />
+      <View style={{ flex: 1 }}>
+        <FlatList
+          style={{ marginTop: 24 }}
+          data={list}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={true}
+        />
+      </View>
     </View>
   );
 }
@@ -198,6 +245,7 @@ export default function ImmunizationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: "15%",
     padding: 24,
   },
   title: {
@@ -222,7 +270,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 0,
-    backgroundColor: "#fdf6f9",
+    backgroundColor: "#fff",
     padding: 12,
     borderRadius: 10,
     marginBottom: 12,
@@ -251,23 +299,41 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+
+  actionArea: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 8,
+  },
+  check: {
+    fontSize: 18,
+    color: "green",
+    fontWeight: "bold",
+    marginRight: 8,
+  },
+  deleteButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 8,
+  },
+  deleteText: {
+    fontSize: 18,
+    color: "red",
+  },
+
   item: {
     padding: 12,
     borderRadius: 6,
-    backgroundColor: "#F0F4F8",
+    backgroundColor: "#fff",
     marginBottom: 10,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center", // penting agar centang & tombol rata tengah
   },
   itemDone: {
     backgroundColor: "#d0f0d0",
   },
   itemText: {
     fontSize: 14,
-  },
-  check: {
-    fontSize: 18,
-    color: "green",
-    fontWeight: "bold",
   },
 });

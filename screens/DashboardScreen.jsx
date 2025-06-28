@@ -10,8 +10,14 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import EducationCard from "../components/EducationCard";
 import ToolMenuItems from "../components/ToolMenuItems";
+import edukasiData from "../data/edukasi.json";
 
 const CARD_SIZE = Dimensions.get("window").width / 3 - 24;
+const imageMap = {
+  "1.png": require("../assets/img-education/1.png"),
+  "2.png": require("../assets/img-education/2.png"),
+  "default.png": require("../assets/img-education/1.png"), // optional fallback
+};
 
 export default function DashboardScreen({ navigation }) {
   const menuItems = [
@@ -102,23 +108,18 @@ export default function DashboardScreen({ navigation }) {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ height: 150, marginBottom: 10 }}
+        style={{ height: 160, marginBottom: 10 }}
       >
-        <EducationCard
-          title="Tips ibu hamil"
-          category="Ibu Hamil"
-          image={require("../assets/img-education/1.png")}
-        />
-        <EducationCard
-          title="Tips ibu hamil"
-          category="Ibu Hamil"
-          image={require("../assets/img-education/1.png")}
-        />
-        <EducationCard
-          title="Tips ibu hamil"
-          category="Ibu Hamil"
-          image={require("../assets/img-education/1.png")}
-        />
+        {edukasiData.slice(0, 4).map((item, index) => (
+          <EducationCard
+            key={item.id}
+            title={item.title}
+            category={item.category}
+            image={
+              imageMap[item.image] || require("../assets/img-education/1.png")
+            }
+          />
+        ))}
       </ScrollView>
       <Text style={styles.sectionTitle}>Tools Menarik</Text>
       <ScrollView

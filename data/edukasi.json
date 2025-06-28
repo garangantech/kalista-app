@@ -1,14 +1,578 @@
 [
   {
     "id": 1,
-    "title": "Apa Itu Siklus Haid?",
-    "summary": "Siklus haid adalah proses bulanan yang terjadi pada tubuh perempuan...",
-    "content": "Siklus haid dimulai dari hari pertama menstruasi hingga hari pertama haid berikutnya..."
+    "category": "Pranikah",
+    "title": "Edukasi Gizi Pranikah",
+    "summary": "Pentingnya pemenuhan gizi bagi wanita sebelum kehamilan untuk persiapan menjadi ibu.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Gizi pranikah adalah gizi yang dibutuhkan wanita sebelum kehamilan. Ini penting karena kesehatan ibu saat hamil dipengaruhi oleh status gizinya sebelum kehamilan."
+      },
+      {
+        "heading": "Tujuan Edukasi Gizi Pranikah",
+        "body": [
+          "Meningkatkan kesadaran tentang pentingnya gizi sebelum hamil.",
+          "Mencegah risiko kehamilan seperti anemia dan berat badan lahir rendah.",
+          "Mempersiapkan kondisi tubuh wanita agar optimal saat mengandung."
+        ]
+      },
+      {
+        "heading": "1. Zat Gizi Penting Sebelum Kehamilan",
+        "body": [
+          "Asam Folat: mencegah cacat tabung saraf pada janin.",
+          "Zat Besi: mencegah anemia.",
+          "Kalsium dan Vitamin D: penting untuk pembentukan tulang.",
+          "Protein: mendukung pertumbuhan dan pemeliharaan jaringan.",
+          "Zinc: berperan dalam kesuburan dan imunitas."
+        ]
+      },
+      {
+        "heading": "2. Pola Makan Seimbang",
+        "body": [
+          "Konsumsi makanan bergizi seimbang: karbohidrat, protein, lemak sehat, vitamin dan mineral.",
+          "Perbanyak sayur dan buah, batasi makanan ultra-proses.",
+          "Minum cukup air, hindari minuman manis dan beralkohol."
+        ]
+      },
+      {
+        "heading": "3. Gaya Hidup Sehat",
+        "body": [
+          "Hindari rokok dan alkohol.",
+          "Lakukan aktivitas fisik rutin.",
+          "Kelola stres dengan baik.",
+          "Periksakan kesehatan secara berkala, termasuk status gizi."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Gizi sebelum kehamilan sangat berpengaruh pada hasil kehamilan dan kesehatan anak. Wanita pranikah disarankan menerapkan pola makan sehat, mencukupi zat gizi penting, serta menjaga gaya hidup sehat."
+      }
+    ]
   },
   {
     "id": 2,
-    "title": "Nutrisi Penting untuk Ibu Hamil",
-    "summary": "Nutrisi selama kehamilan sangat penting untuk tumbuh kembang janin...",
-    "content": "Beberapa nutrisi penting antara lain asam folat, zat besi, kalsium, dan protein..."
+    "category": "Suami Istri",
+    "title": "Edukasi Hubungan Suami Istri",
+    "summary": "Panduan membangun hubungan suami istri yang sehat, penuh kasih, dan harmonis.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Hubungan suami istri adalah bagian penting dalam kehidupan pernikahan yang sehat dan harmonis. Edukasi hubungan suami istri bertujuan untuk membangun komunikasi yang baik, menghormati satu sama lain, serta menjaga aspek emosional, fisik, dan spiritual dalam rumah tangga."
+      },
+      {
+        "heading": "Tujuan Edukasi Hubungan Suami Istri",
+        "body": [
+          "Meningkatkan pemahaman tentang peran dan tanggung jawab masing-masing.",
+          "Menumbuhkan komunikasi yang terbuka dan saling menghargai.",
+          "Membangun kedekatan emosional dan fisik yang sehat.",
+          "Mencegah konflik dalam rumah tangga.",
+          "Mendukung kesehatan reproduksi dan perencanaan keluarga."
+        ]
+      },
+      {
+        "heading": "1. Komunikasi dan Emosi",
+        "body": [
+          "Selalu berusaha terbuka dan jujur dalam menyampaikan pikiran dan perasaan.",
+          "Dengarkan pasangan tanpa menghakimi.",
+          "Saling menghargai perbedaan dan menemukan solusi bersama.",
+          "Luangkan waktu berkualitas bersama untuk memperkuat ikatan emosional."
+        ]
+      },
+      {
+        "heading": "2. Hubungan Fisik dan Seksual",
+        "body": [
+          "Hubungan seksual yang sehat didasari oleh rasa cinta, saling pengertian, dan kenyamanan.",
+          "Penting untuk saling menjaga kebersihan dan kesehatan organ reproduksi.",
+          "Bicarakan secara terbuka mengenai kebutuhan dan kenyamanan masing-masing.",
+          "Gunakan kontrasepsi sesuai kesepakatan dan perencanaan keluarga."
+        ]
+      },
+      {
+        "heading": "3. Nilai Agama dan Etika",
+        "body": [
+          "Jadikan hubungan suami istri sebagai ibadah dan wujud kasih sayang.",
+          "Jaga etika dan batasan dalam berhubungan sesuai nilai agama dan budaya.",
+          "Saling mendukung dalam menjalankan kewajiban dan tanggung jawab spiritual."
+        ]
+      },
+      {
+        "heading": "4. Tantangan dalam Hubungan dan Cara Menghadapinya",
+        "body": [
+          "Hadapi masalah rumah tangga dengan kepala dingin dan komunikasi sehat.",
+          "Jangan ragu meminta bantuan dari konselor atau tokoh agama bila perlu.",
+          "Jaga kepercayaan, setia, dan tanggung jawab terhadap pasangan."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Hubungan suami istri yang sehat adalah fondasi dari keluarga yang harmonis. Dibutuhkan komunikasi yang jujur, saling menghargai, kasih sayang, dan pemahaman tentang kebutuhan satu sama lain untuk membangun rumah tangga yang langgeng dan bahagia."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "category": "Ibu & Anak",
+    "title": "Edukasi Kesehatan Mental Ibu",
+    "summary": "Meningkatkan kesadaran dan dukungan untuk menjaga kesehatan mental ibu selama kehamilan dan masa nifas.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Tujuan Edukasi",
+        "body": [
+          "Meningkatkan kesadaran ibu tentang pentingnya kesehatan mental selama kehamilan dan masa nifas.",
+          "Mendeteksi dini gangguan mental dan emosi pada ibu.",
+          "Memberikan strategi dukungan dan penanganan awal yang tepat."
+        ]
+      },
+      {
+        "heading": "1. Pengertian Kesehatan Mental Ibu",
+        "body": "Kesehatan mental ibu adalah kondisi emosional, psikologis, dan sosial yang stabil yang memungkinkan ibu menjalani kehamilan, persalinan, dan pengasuhan anak dengan optimal."
+      },
+      {
+        "heading": "2. Risiko Gangguan Mental pada Ibu",
+        "body": [
+          "Perubahan hormon saat hamil dan setelah melahirkan",
+          "Tekanan sosial, ekonomi, dan rumah tangga",
+          "Riwayat gangguan mental sebelumnya",
+          "Kurangnya dukungan dari pasangan atau keluarga",
+          "Kelelahan karena merawat bayi"
+        ]
+      },
+      {
+        "heading": "3. Jenis Gangguan Mental pada Ibu",
+        "body": [
+          "Baby Blues: Mudah menangis, cemas ringan, biasanya hilang dalam 1–2 minggu pasca persalinan.",
+          "Postpartum Depression: Kesedihan mendalam, tidak bersemangat, sulit tidur, tidak tertarik merawat bayi.",
+          "Postpartum Anxiety: Kecemasan berlebihan terhadap keselamatan bayi, sulit tidur meski bayi tidur.",
+          "Postpartum Psychosis: Halusinasi, delusi, perubahan perilaku ekstrem (darurat medis)."
+        ]
+      },
+      {
+        "heading": "4. Tanda-Tanda Peringatan Gangguan Mental",
+        "body": [
+          "Tidak tertarik mengurus bayi",
+          "Merasa tidak mampu sebagai ibu",
+          "Hilang nafsu makan atau tidur berlebihan",
+          "Menarik diri dari lingkungan sosial",
+          "Pikiran menyakiti diri sendiri atau bayi"
+        ]
+      },
+      {
+        "heading": "5. Cara Menjaga Kesehatan Mental Ibu",
+        "body": [
+          "Istirahat cukup",
+          "Konsumsi makanan bergizi",
+          "Dukungan dari pasangan dan keluarga",
+          "Bercerita dengan orang yang dipercaya",
+          "Ikut senam ibu hamil atau kelompok ibu",
+          "Latihan relaksasi, ibadah, atau meditasi"
+        ]
+      },
+      {
+        "heading": "6. Dukungan yang Dibutuhkan Ibu",
+        "body": [
+          "Suami: membantu pekerjaan rumah, menjadi pendengar",
+          "Keluarga: menjaga bayi, memberi waktu istirahat pada ibu",
+          "Tenaga kesehatan: memantau kondisi emosional saat kunjungan"
+        ]
+      },
+      {
+        "heading": "7. Kemana Harus Mencari Bantuan",
+        "body": [
+          "Bidan, perawat, atau dokter Puskesmas",
+          "Psikolog klinis",
+          "RSUD atau klinik jiwa",
+          "Hotline Kesehatan Jiwa Kemenkes: 119 ext. 8"
+        ]
+      },
+      {
+        "heading": "Penutup",
+        "body": "Kesehatan mental ibu sangat penting bagi tumbuh kembang anak dan keharmonisan keluarga. Dukungan semua pihak sangat dibutuhkan agar ibu merasa dihargai, aman, dan kuat menjalani peran barunya."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "category": "Orang Tua",
+    "title": "Edukasi Persiapan Menjadi Orang Tua",
+    "summary": "Persiapan fisik, mental, dan emosional yang dibutuhkan sebelum menjalani peran sebagai orang tua.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Tujuan Edukasi",
+        "body": [
+          "Meningkatkan pemahaman calon orang tua mengenai tanggung jawab dan peran mereka.",
+          "Menyiapkan aspek fisik, mental, emosional, dan finansial untuk menyambut kelahiran anak.",
+          "Mendorong keterlibatan aktif kedua orang tua dalam pengasuhan anak sejak dini."
+        ]
+      },
+      {
+        "heading": "1. Tanggung Jawab Menjadi Orang Tua",
+        "body": [
+          "Memberikan kasih sayang, perhatian, dan waktu bagi anak.",
+          "Memenuhi kebutuhan dasar anak (nutrisi, kesehatan, pendidikan).",
+          "Menjadi teladan yang baik dalam sikap dan perilaku.",
+          "Menjaga keamanan dan kenyamanan lingkungan anak tumbuh."
+        ]
+      },
+      {
+        "heading": "2. Persiapan Fisik dan Kesehatan",
+        "body": [
+          "Melakukan pemeriksaan kesehatan prakonsepsi dan selama kehamilan.",
+          "Mengetahui informasi tentang proses kehamilan, persalinan, dan menyusui.",
+          "Menyiapkan perlengkapan bayi dan rumah yang aman bagi anak."
+        ]
+      },
+      {
+        "heading": "3. Persiapan Mental dan Emosional",
+        "body": [
+          "Siap menghadapi perubahan pola hidup, waktu istirahat, dan rutinitas.",
+          "Mengelola stres dan emosi selama kehamilan dan setelah kelahiran.",
+          "Bersikap terbuka untuk belajar dan menerima dukungan dari orang lain."
+        ]
+      },
+      {
+        "heading": "4. Peran Ayah dalam Pengasuhan",
+        "body": [
+          "Mendukung ibu secara emosional selama kehamilan dan nifas.",
+          "Aktif terlibat dalam merawat anak, seperti mengganti popok, menenangkan bayi, dsb.",
+          "Menjalin ikatan emosional dengan anak sejak dini.",
+          "Menjadi pelindung dan pembimbing bagi anak."
+        ]
+      },
+      {
+        "heading": "5. Komunikasi Pasangan",
+        "body": [
+          "Diskusikan pembagian peran dan tugas saat bayi lahir.",
+          "Saling mendukung dan memberi apresiasi atas peran masing-masing.",
+          "Menjaga kualitas hubungan suami istri agar tetap harmonis."
+        ]
+      },
+      {
+        "heading": "Penutup",
+        "body": "Menjadi orang tua adalah perjalanan panjang yang membutuhkan kesiapan lahir dan batin. Dengan edukasi dan dukungan yang cukup, pasangan dapat menghadapi fase baru ini dengan keyakinan dan kebahagiaan."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "category": "Anak",
+    "title": "Edukasi Perundungan dan Kekerasan Anak",
+    "summary": "Pentingnya kesadaran dan perlindungan terhadap anak dari segala bentuk perundungan dan kekerasan.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Perundungan (bullying) dan kekerasan terhadap anak merupakan isu serius yang berdampak jangka panjang terhadap kesehatan mental, emosional, dan sosial anak. Orang tua dan masyarakat perlu memiliki pemahaman dan keterampilan dalam mencegah serta menangani situasi ini."
+      },
+      {
+        "heading": "1. Jenis Kekerasan pada Anak",
+        "body": [
+          "Kekerasan fisik: memukul, menampar, mencubit, dll.",
+          "Kekerasan verbal: menghina, meneriaki, membentak.",
+          "Kekerasan emosional: mengabaikan, mengucilkan, memanipulasi.",
+          "Kekerasan seksual: perlakuan atau sentuhan seksual yang tidak pantas.",
+          "Penelantaran: tidak memenuhi kebutuhan dasar anak."
+        ]
+      },
+      {
+        "heading": "2. Ciri Anak yang Mengalami Kekerasan atau Perundungan",
+        "body": [
+          "Muncul rasa takut atau cemas berlebihan.",
+          "Menjadi pendiam atau berubah perilaku secara drastis.",
+          "Menunjukkan luka fisik yang tidak jelas sebabnya.",
+          "Enggan ke sekolah atau tempat umum.",
+          "Menunjukkan penurunan prestasi akademik."
+        ]
+      },
+      {
+        "heading": "3. Peran Orang Tua dan Keluarga",
+        "body": [
+          "Membangun komunikasi yang terbuka dan penuh kasih dengan anak.",
+          "Mengajarkan anak untuk mengenali dan melaporkan tindakan kekerasan.",
+          "Menjadi teladan dalam menyelesaikan konflik tanpa kekerasan.",
+          "Menghindari pola asuh keras atau hukuman fisik.",
+          "Mengawasi aktivitas anak di dunia nyata dan digital (cyberbullying)."
+        ]
+      },
+      {
+        "heading": "4. Pencegahan dan Penanganan",
+        "body": [
+          "Ajarkan anak keterampilan sosial dan asertif sejak dini.",
+          "Laporkan kasus kekerasan ke pihak berwenang atau lembaga perlindungan anak.",
+          "Libatkan sekolah dan masyarakat dalam upaya pencegahan dan penanganan.",
+          "Berikan dukungan psikologis jika anak mengalami trauma."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Melindungi anak dari kekerasan dan perundungan adalah tanggung jawab bersama. Dengan edukasi, perhatian, dan perlindungan yang tepat, anak-anak dapat tumbuh dengan aman, percaya diri, dan bahagia."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "category": "Pranikah",
+    "title": "Kesiapan Mental Sebelum Menikah",
+    "summary": "Mempersiapkan mental yang sehat dan matang sebelum menikah untuk menciptakan rumah tangga yang harmonis dan bahagia.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Menikah bukan hanya persoalan cinta, tetapi juga kesiapan mental, emosional, dan tanggung jawab jangka panjang. Persiapan mental yang baik akan membantu pasangan membangun pernikahan yang sehat dan bahagia."
+      },
+      {
+        "heading": "1. Apa Itu Kesiapan Mental?",
+        "body": [
+          "Kemampuan mengelola emosi dan stres.",
+          "Mempunyai sikap dewasa dan bijak dalam menyelesaikan masalah.",
+          "Siap berbagi kehidupan dengan pasangan secara adil dan terbuka.",
+          "Mempunyai pemahaman realistis tentang kehidupan pernikahan."
+        ]
+      },
+      {
+        "heading": "2. Tanda-Tanda Seseorang Siap Menikah Secara Mental",
+        "body": [
+          "Dapat berkomunikasi secara terbuka dan sehat.",
+          "Mampu menyelesaikan konflik tanpa kekerasan atau emosi berlebihan.",
+          "Memiliki tujuan hidup yang jelas dan realistis bersama pasangan.",
+          "Mampu menerima kekurangan dan kelebihan pasangan.",
+          "Punya empati dan komitmen tinggi dalam hubungan."
+        ]
+      },
+      {
+        "heading": "3. Langkah Persiapan Mental Sebelum Menikah",
+        "body": [
+          "Kenali diri sendiri: nilai, harapan, kelemahan, dan kekuatan.",
+          "Bangun komunikasi yang jujur dan terbuka dengan pasangan.",
+          "Diskusikan peran, tanggung jawab, dan rencana masa depan.",
+          "Ikuti konseling pranikah jika memungkinkan.",
+          "Libatkan keluarga dengan cara yang sehat dan tidak mendominasi."
+        ]
+      },
+      {
+        "heading": "4. Dampak Menikah Tanpa Kesiapan Mental",
+        "body": [
+          "Mudah terjadi konflik dan perceraian.",
+          "Timbul stres dan tekanan mental dalam rumah tangga.",
+          "Kurangnya empati dan dukungan emosional terhadap pasangan.",
+          "Rentan terhadap kekerasan dalam rumah tangga (KDRT)."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Kesiapan mental sebelum menikah sangat penting dalam membangun rumah tangga yang harmonis. Jangan hanya fokus pada acara pernikahan, tapi juga bekali diri dengan kematangan emosi, komunikasi yang sehat, dan kesiapan menjalani kehidupan bersama."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "category": "Kesehatan Anak",
+    "title": "Edukasi Pencegahan Stunting",
+    "summary": "Stunting adalah kondisi gagal tumbuh akibat kekurangan gizi kronis. Artikel ini membahas pencegahan stunting sejak masa pranikah hingga anak usia 2 tahun.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Stunting adalah kondisi gagal tumbuh pada anak akibat kekurangan gizi kronis terutama dalam 1.000 hari pertama kehidupan (HPK). Anak yang mengalami stunting memiliki tinggi badan di bawah standar usianya."
+      },
+      {
+        "heading": "Faktor Penyebab Stunting",
+        "body": [
+          "Kurangnya asupan gizi sejak dalam kandungan.",
+          "Infeksi berulang pada anak.",
+          "Sanitasi yang buruk dan air minum tidak layak.",
+          "Kurangnya stimulasi dan pengasuhan."
+        ]
+      },
+      {
+        "heading": "Dampak Stunting",
+        "body": [
+          "Gangguan pertumbuhan fisik dan perkembangan otak.",
+          "Kesulitan belajar dan prestasi rendah di sekolah.",
+          "Risiko penyakit kronis saat dewasa lebih tinggi.",
+          "Menurunkan produktivitas di masa depan."
+        ]
+      },
+      {
+        "heading": "Pencegahan Stunting",
+        "body": [
+          "Perbaiki gizi calon ibu sebelum kehamilan.",
+          "Penuhi kebutuhan gizi ibu hamil, termasuk zat besi dan asam folat.",
+          "Berikan ASI eksklusif selama 6 bulan dan MPASI yang bergizi seimbang.",
+          "Cukupi imunisasi dan pantau tumbuh kembang anak secara rutin.",
+          "Terapkan pola hidup bersih dan sehat."
+        ]
+      },
+      {
+        "heading": "Peran Keluarga dan Masyarakat",
+        "body": [
+          "Keluarga perlu terlibat aktif dalam pemenuhan gizi dan kesehatan anak.",
+          "Masyarakat dan kader posyandu bisa mendukung dengan edukasi dan pemantauan berkala.",
+          "Peran ayah juga penting dalam mendukung ibu dan anak secara emosional dan ekonomi."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Pencegahan stunting harus dimulai sejak masa pranikah, kehamilan, hingga anak usia dua tahun. Keterlibatan semua pihak, termasuk keluarga dan masyarakat, sangat penting dalam mewujudkan generasi sehat dan berkualitas."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "category": "Kesehatan Anak",
+    "title": "Edukasi Kesehatan Anak",
+    "summary": "Panduan dasar menjaga kesehatan anak usia dini mulai dari imunisasi, nutrisi, hingga kebersihan dan stimulasi perkembangan.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Masa anak-anak adalah masa pertumbuhan yang sangat penting. Menjaga kesehatan anak sejak dini adalah investasi masa depan bangsa. Orang tua harus memahami aspek penting dalam tumbuh kembang dan kesehatan anak."
+      },
+      {
+        "heading": "Imunisasi Dasar",
+        "body": [
+          "Imunisasi penting untuk mencegah penyakit berbahaya seperti campak, polio, difteri, dan hepatitis B.",
+          "Pastikan anak mendapat imunisasi lengkap sesuai jadwal dari Kemenkes.",
+          "Ikuti kegiatan posyandu atau puskesmas untuk mendapatkan imunisasi gratis dan informasi terbaru."
+        ]
+      },
+      {
+        "heading": "Nutrisi Seimbang",
+        "body": [
+          "Penuhi kebutuhan gizi anak dengan makanan bergizi seimbang yang mengandung karbohidrat, protein, lemak sehat, vitamin, dan mineral.",
+          "Berikan ASI eksklusif hingga usia 6 bulan dan lanjutkan hingga 2 tahun dengan MPASI sehat.",
+          "Batasi makanan manis, asin, dan ultra-proses pada anak."
+        ]
+      },
+      {
+        "heading": "Kebersihan dan Sanitasi",
+        "body": [
+          "Ajarkan anak mencuci tangan dengan sabun sebelum makan dan setelah dari toilet.",
+          "Jaga kebersihan lingkungan tempat bermain anak.",
+          "Gunakan air bersih dan pastikan sanitasi keluarga layak."
+        ]
+      },
+      {
+        "heading": "Pemantauan Tumbuh Kembang",
+        "body": [
+          "Pantau berat badan dan tinggi anak secara rutin di posyandu.",
+          "Kenali tanda-tanda keterlambatan tumbuh kembang dan konsultasikan ke tenaga kesehatan.",
+          "Stimulasi anak dengan bermain, membaca buku, dan berbicara secara aktif."
+        ]
+      },
+      {
+        "heading": "Peran Keluarga",
+        "body": "Keluarga memiliki peran penting dalam menjaga kesehatan anak. Dukungan ayah, ibu, dan anggota keluarga lainnya sangat berpengaruh terhadap kondisi fisik dan psikologis anak."
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Kesehatan anak adalah prioritas utama dalam keluarga. Perhatikan imunisasi, nutrisi, kebersihan, dan stimulasi sejak dini agar anak tumbuh sehat, cerdas, dan bahagia."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "category": "Kesehatan Reproduksi",
+    "title": "Edukasi Kesehatan Reproduksi Remaja",
+    "summary": "Pentingnya pemahaman remaja tentang sistem reproduksi, pubertas, dan menjaga kesehatan organ reproduksi untuk masa depan yang sehat.",
+    "image": "1.png",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Kesehatan reproduksi adalah kondisi sehat fisik, mental, dan sosial secara utuh dalam segala hal yang berkaitan dengan sistem, fungsi, dan proses reproduksi. Edukasi kesehatan reproduksi penting dimulai sejak remaja."
+      },
+      {
+        "heading": "Tujuan Edukasi Reproduksi untuk Remaja",
+        "body": [
+          "Menumbuhkan kesadaran akan pentingnya menjaga kesehatan organ reproduksi.",
+          "Memberikan pemahaman tentang perubahan fisik dan emosional saat pubertas.",
+          "Mencegah perilaku berisiko dan menjaga dari kekerasan seksual."
+        ]
+      },
+      {
+        "heading": "Perubahan Saat Pubertas",
+        "body": [
+          "Pubertas terjadi di usia 9–15 tahun, ditandai dengan perubahan fisik seperti tumbuhnya rambut di organ intim, perubahan suara, dan pertumbuhan payudara.",
+          "Remaja perlu dibekali informasi tentang cara menjaga kebersihan diri dan menghargai tubuh sendiri."
+        ]
+      },
+      {
+        "heading": "Menjaga Kesehatan Organ Reproduksi",
+        "body": [
+          "Mandi dua kali sehari dan bersihkan organ intim dengan air bersih.",
+          "Gunakan pakaian dalam yang bersih dan diganti setiap hari.",
+          "Hindari berbagi handuk atau pakaian dalam dengan orang lain."
+        ]
+      },
+      {
+        "heading": "Menghindari Risiko",
+        "body": [
+          "Jauhi pergaulan bebas dan tekanan dari teman sebaya.",
+          "Gunakan media sosial dengan bijak dan waspadai kejahatan daring.",
+          "Segera laporkan jika mengalami pelecehan seksual pada orang yang dipercaya."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Remaja yang memahami kesehatan reproduksi akan lebih siap menjalani masa transisi ke dewasa dengan sehat dan bertanggung jawab. Edukasi ini perlu diberikan secara terbuka, positif, dan sesuai usia."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "category": "Ibu Menyusui",
+    "title": "Tips Menyusui untuk Ibu Baru",
+    "summary": "Panduan menyusui yang efektif dan nyaman bagi ibu baru, agar proses menyusui berjalan lancar dan mendukung pertumbuhan bayi.",
+    "image": "1.png"",
+    "content": [
+      {
+        "heading": "Pendahuluan",
+        "body": "Menyusui adalah proses alami yang memberikan nutrisi optimal dan ikatan emosional antara ibu dan bayi. Namun, bagi ibu baru, proses ini sering menimbulkan tantangan. Oleh karena itu, pemahaman dan dukungan sangat penting."
+      },
+      {
+        "heading": "Manfaat Menyusui",
+        "body": [
+          "Memberikan nutrisi lengkap dan antibodi alami untuk bayi.",
+          "Mengurangi risiko infeksi, alergi, dan SIDS (kematian bayi mendadak).",
+          "Membantu ibu mempercepat pemulihan pasca melahirkan.",
+          "Mengurangi risiko kanker payudara dan ovarium pada ibu."
+        ]
+      },
+      {
+        "heading": "Tips Menyusui yang Efektif",
+        "body": [
+          "Pastikan posisi menyusui nyaman, baik untuk ibu maupun bayi.",
+          "Perlekatan mulut bayi harus tepat: mulut terbuka lebar, menutupi sebagian besar areola.",
+          "Susui sesering mungkin, terutama saat bayi menunjukkan tanda lapar (mengisap tangan, membuka mulut, gelisah).",
+          "Jangan tunggu bayi menangis baru disusui.",
+          "Bersihkan payudara hanya dengan air bersih, tidak perlu sabun khusus."
+        ]
+      },
+      {
+        "heading": "Tantangan yang Sering Dihadapi",
+        "body": [
+          "Puting lecet: gunakan ASI sebagai pelembap alami, biarkan kering sebelum ditutup kembali.",
+          "ASI belum keluar: tetap susui secara rutin agar produksi lancar.",
+          "Payudara bengkak: kompres hangat dan perah sedikit ASI jika terlalu penuh.",
+          "Bayi malas menyusu: bangunkan dengan lembut, coba posisi menyusui berbeda."
+        ]
+      },
+      {
+        "heading": "Mendapatkan Dukungan",
+        "body": [
+          "Libatkan pasangan dan keluarga untuk mendukung ibu menyusui.",
+          "Bergabung dalam komunitas ibu menyusui atau konseling laktasi.",
+          "Jangan ragu bertanya pada bidan atau tenaga kesehatan bila mengalami kesulitan."
+        ]
+      },
+      {
+        "heading": "Kesimpulan",
+        "body": "Menyusui adalah proses belajar bagi ibu dan bayi. Dengan informasi yang tepat, dukungan keluarga, dan kesabaran, ibu dapat menjalani proses menyusui dengan lebih percaya diri dan nyaman."
+      }
+    ]
   }
 ]

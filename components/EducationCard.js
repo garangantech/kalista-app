@@ -6,8 +6,13 @@ export default function EducationCard({ title, subtitle, category, image }) {
     <View style={styles.card}>
       <Image source={image} style={styles.image} resizeMode="cover" />
       <View style={styles.textContainer}>
-        <Text style={styles.category}>{category}</Text>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.category} numberOfLines={1} ellipsizeMode="tail">
+          {category}
+        </Text>
+
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+          {title}
+        </Text>
       </View>
     </View>
   );
@@ -43,11 +48,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     textTransform: "uppercase",
     fontWeight: "600",
+    maxWidth: "100%", // atau angka seperti 110
+    overflow: "hidden",
   },
+
   title: {
     fontSize: 14,
     fontWeight: "bold",
     color: "#333",
     marginBottom: 4,
+    maxWidth: "100%",
+    overflow: "hidden",
   },
 });

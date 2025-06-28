@@ -168,7 +168,7 @@ export default function Navigation() {
               component={ImmunizationScreen}
               options={{
                 headerShown: true,
-                headerTitle: "Jadwal Imunisasi Anak",
+                headerTitle: "Imunisasi Anak",
               }}
             />
             <Stack.Screen
@@ -189,10 +189,15 @@ export default function Navigation() {
               component={PranikahDetailScreen}
               options={{ headerShown: true, headerTitle: "Fitur Pranikah" }}
             />
-            <Stack.Screen name="Edukasi" component={EdukasiScreen} />
+            <Stack.Screen
+              name="Edukasi"
+              component={EdukasiScreen}
+              options={{ headerShown: true, headerTitle: "Artikel Edukasi" }}
+            />
             <Stack.Screen
               name="EdukasiDetail"
               component={EdukasiDetailScreen}
+              options={{ headerShown: true, headerTitle: "Artikel Edukasi" }}
             />
             <Stack.Screen
               name="GrowthChart"
@@ -233,7 +238,6 @@ export default function Navigation() {
                 headerTitle: "Mood Tracker Harian",
               }}
             />
-            {/* Tambah screen lain di sini nanti */}
           </>
         )}
       </Stack.Navigator>
