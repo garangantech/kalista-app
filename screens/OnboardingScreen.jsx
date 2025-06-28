@@ -66,7 +66,13 @@ export default function OnboardingScreen({ navigation }) {
             }}
             style={styles.dateButton}
           >
-            <Text>{birthDate.toDateString()}</Text>
+            <Text>
+              {birthDate.toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -104,7 +110,15 @@ export default function OnboardingScreen({ navigation }) {
                 }}
                 style={styles.dateButton}
               >
-                <Text>{hpl ? hpl.toDateString() : "Pilih Tanggal"}</Text>
+                <Text>
+                  {hpl
+                    ? hpl.toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : "Pilih Tanggal"}
+                </Text>
               </TouchableOpacity>
             </>
           )}
@@ -120,7 +134,13 @@ export default function OnboardingScreen({ navigation }) {
                 style={styles.dateButton}
               >
                 <Text>
-                  {lastPeriod ? lastPeriod.toDateString() : "Pilih Tanggal"}
+                  {lastPeriod
+                    ? lastPeriod.toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : "Pilih Tanggal"}
                 </Text>
               </TouchableOpacity>
             </>
@@ -150,12 +170,35 @@ export default function OnboardingScreen({ navigation }) {
         <>
           <Text style={styles.title}>Konfirmasi</Text>
           <Text>Nama: {name}</Text>
-          <Text>Tgl Lahir: {birthDate.toDateString()}</Text>
+          <Text>
+            Tgl Lahir:{" "}
+            {birthDate.toLocaleDateString("id-ID", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </Text>
           <Text>Status: {status}</Text>
           {lastPeriod && (
-            <Text>Haid Terakhir: {lastPeriod.toDateString()}</Text>
+            <Text>
+              Haid Terakhir:{" "}
+              {lastPeriod.toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </Text>
           )}
-          {hpl && <Text>HPL: {hpl.toDateString()}</Text>}
+          {hpl && (
+            <Text>
+              HPL:{" "}
+              {hpl.toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </Text>
+          )}
           {status === "Orang Tua" && (
             <Text>Punya anak: {hasChild ? "Ya" : "Tidak"}</Text>
           )}
