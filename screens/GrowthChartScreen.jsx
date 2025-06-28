@@ -58,8 +58,16 @@ export default function GrowthChartScreen() {
     setHeight("");
   };
 
+  const chartWidth = Math.max(screenWidth, data.length * 60);
+
   const weightChart = {
-    labels: data.map((d) => d.date),
+    labels: data.map((d) =>
+      new Date(d.date).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+      })
+    ),
     datasets: [
       {
         data: data.map((d) => d.weight),
@@ -70,7 +78,13 @@ export default function GrowthChartScreen() {
   };
 
   const heightChart = {
-    labels: data.map((d) => d.date),
+    labels: data.map((d) =>
+      new Date(d.date).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+      })
+    ),
     datasets: [
       {
         data: data.map((d) => d.height),
@@ -137,24 +151,28 @@ export default function GrowthChartScreen() {
       {data.length > 0 && (
         <>
           <Text style={styles.chartTitle}>Grafik Berat Badan (kg)</Text>
-          <LineChart
-            data={weightChart}
-            width={screenWidth - 40}
-            height={220}
-            chartConfig={chartConfig}
-            bezier
-            style={styles.chart}
-          />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <LineChart
+              data={weightChart}
+              width={chartWidth} // Auto-scale by data
+              height={220}
+              chartConfig={chartConfig}
+              bezier
+              style={styles.chart}
+            />
+          </ScrollView>
 
           <Text style={styles.chartTitle}>Grafik Tinggi Badan (cm)</Text>
-          <LineChart
-            data={heightChart}
-            width={screenWidth - 40}
-            height={220}
-            chartConfig={chartConfig}
-            bezier
-            style={styles.chart}
-          />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <LineChart
+              data={heightChart}
+              width={chartWidth}
+              height={220}
+              chartConfig={chartConfig}
+              bezier
+              style={styles.chart}
+            />
+          </ScrollView>
         </>
       )}
     </ScrollView>
