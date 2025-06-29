@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   TextInput,
@@ -8,8 +8,10 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { SearchContext } from "../utils/SearchContext";
 
-export default function CustomDashboardHeader({ onPress }) {
+export default function CustomDashboardHeader({ navigation }) {
+  const { searchKeyword, setSearchKeyword } = useContext(SearchContext);
   return (
     <View style={styles.outerContainer}>
       <View style={styles.innerContainer}>
@@ -22,12 +24,14 @@ export default function CustomDashboardHeader({ onPress }) {
 
         <View style={styles.searchContainer}>
           <TextInput
+            value={searchKeyword}
+            onChangeText={setSearchKeyword}
             placeholder="Cari artikel..."
             placeholderTextColor="#999"
             style={styles.searchInput}
           />
         </View>
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <Ionicons name="person-circle" size={35} color="#fe61ad" />
         </TouchableOpacity>
       </View>

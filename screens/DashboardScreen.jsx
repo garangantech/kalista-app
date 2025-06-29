@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,11 +6,15 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  FlatList,
+  Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import EducationCard from "../components/EducationCard";
 import ToolMenuItems from "../components/ToolMenuItems";
 import edukasiData from "../data/edukasi.json";
+import { useFocusEffect } from "@react-navigation/native";
+import { SearchContext } from "../utils/SearchContext";
 
 const CARD_SIZE = Dimensions.get("window").width / 3 - 24;
 const imageMap = {
@@ -20,6 +24,16 @@ const imageMap = {
 };
 
 export default function DashboardScreen({ navigation }) {
+  const { searchKeyword, setSearchKeyword } = useContext(SearchContext);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setSearchKeyword(""); // reset saat keluar
+      };
+    }, [])
+  );
+
   const menuItems = [
     {
       label: "Siklus Haid",
@@ -79,6 +93,59 @@ export default function DashboardScreen({ navigation }) {
       onPress: () => navigation.navigate("ChecklistScreen"),
     },
   ];
+
+  const filteredData = edukasiData.filter((item) =>
+    item.title.toLowerCase().includes(searchKeyword.toLowerCase())
+  );
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={{
+        backgroundColor: "#fff",
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 10,
+        flexDirection: "row",
+        gap: 10,
+      }}
+      onPress={() => navigation.navigate("EdukasiDetail", { item })}
+    >
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontSize: 12, color: "#888" }}>{item.category}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.title}</Text>
+        <Text numberOfLines={2} style={{ color: "#444" }}>
+          {item.summary}
+        </Text>
+      </View>
+      <Image
+        source={
+          imageMap[item.image] || require("../assets/img-education/1.png")
+        }
+        style={{ width: 80, height: 80, borderRadius: 10 }}
+      />
+    </TouchableOpacity>
+  );
+
+  // ===== Conditional Rendering =====
+  if (searchKeyword.trim() !== "") {
+    return (
+      <View style={{ flex: 1, padding: 15, backgroundColor: "#eaebf0" }}>
+        <Text style={styles.sectionTitle}>Hasil Pencarian</Text>
+        <FlatList
+          data={filteredData}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={{ paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <Text style={{ textAlign: "center", marginTop: 20, color: "#777" }}>
+              Tidak ada hasil ditemukan.
+            </Text>
+          }
+        />
+      </View>
+    );
+  }
 
   return (
     <ScrollView

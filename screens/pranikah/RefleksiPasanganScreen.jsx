@@ -122,7 +122,6 @@ export default function RefleksiPasanganScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    padding: 16,
     paddingBottom: 40,
   },
   container: { flex: 1, backgroundColor: "#fff" },

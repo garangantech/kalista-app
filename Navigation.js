@@ -19,7 +19,6 @@ import PregnancyScreen from "./screens/PregnancyScreen";
 import ImmunizationScreen from "./screens/ImmunizationScreen";
 import PregnancyPlanScreen from "./screens/PregnancyPlanScreen";
 import PranikahScreen from "./screens/PranikahScreen";
-import PranikahDetailScreen from "./screens/PranikahDetailScreen";
 import EdukasiScreen from "./screens/EdukasiScreen";
 import EdukasiDetailScreen from "./screens/EdukasiDetailScreen";
 import GrowthChartScreen from "./screens/GrowthChartScreen";
@@ -39,7 +38,7 @@ export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainTabs({ navigation }) {
+function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -59,22 +58,16 @@ function MainTabs({ navigation }) {
       <Tab.Screen
         name="Home"
         component={DashboardScreen}
-        options={{
-          headerTitle: () => (
-            <CustomDashboardHeader
-              onPress={() => navigation.navigate("Profile")}
-            />
-          ),
+        options={({ navigation }) => ({
+          headerTitle: () => <CustomDashboardHeader navigation={navigation} />,
           headerTitleAlign: "center",
-          headerTitleContainerStyle: {
-            width: "100%",
-          },
+          headerTitleContainerStyle: { width: "100%" },
           headerStyle: {
             backgroundColor: "#fff",
             borderBottomWidth: 1,
             borderBottomColor: "#ccc",
           },
-        }}
+        })}
       />
       <Tab.Screen
         name="Menu"
@@ -169,10 +162,12 @@ export default function Navigation() {
   }, [reloadFlag]);
 
   useEffect(() => {
-    const unsubscribe = navigationRef?.addListener("state", () => {
+    if (!navigationRef.isReady()) return;
+
+    const unsubscribe = navigationRef.addListener("state", () => {
       const reload = navigationRef.getCurrentRoute()?.params?.reload;
       if (reload) {
-        setReloadFlag((prev) => prev + 1); // trigger reload
+        setReloadFlag((prev) => prev + 1);
       }
     });
 
@@ -182,7 +177,7 @@ export default function Navigation() {
   if (isLoading) return null; // Bisa ditambahkan splash/loading screen
 
   return (
-    <NavigationContainer ref={navigationRef} key={appKey}>
+    <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {firstTimeUser ? (
           <Stack.Screen name="Onboarding" component={OnboardingScreen} />
@@ -222,14 +217,11 @@ export default function Navigation() {
               options={{ headerShown: true, headerTitle: "Fitur Pranikah" }}
             />
             <Stack.Screen
-              name="PranikahDetail"
-              component={PranikahDetailScreen}
-              options={{ headerShown: true, headerTitle: "Fitur Pranikah" }}
-            />
-            <Stack.Screen
               name="Edukasi"
               component={EdukasiScreen}
-              options={{ headerShown: true, headerTitle: "Artikel Edukasi" }}
+              options={{
+                headerShown: true,
+              }}
             />
             <Stack.Screen
               name="EdukasiDetail"

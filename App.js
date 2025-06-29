@@ -1,9 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
-import Navigation from "./Navigation";
+import Navigation, { navigationRef } from "./Navigation";
 import * as Notifications from "expo-notifications";
 import { Platform, ScrollView } from "react-native";
 import { scheduleNotification } from "./services/NotificationService";
+import { SearchProvider } from "./utils/SearchContext";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -22,9 +23,13 @@ export default function App() {
       }
       console.log("✅ Izin notifikasi diizinkan");
     };
-
+    console.log("Ref ready?", navigationRef.isReady());
     setupNotifications();
   }, []);
 
-  return <Navigation />;
+  return (
+    <SearchProvider>
+      <Navigation />
+    </SearchProvider>
+  );
 }
