@@ -38,7 +38,7 @@ export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainTabs() {
+function MainTabs({ navigation }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -162,12 +162,10 @@ export default function Navigation() {
   }, [reloadFlag]);
 
   useEffect(() => {
-    if (!navigationRef.isReady()) return;
-
-    const unsubscribe = navigationRef.addListener("state", () => {
+    const unsubscribe = navigationRef?.addListener("state", () => {
       const reload = navigationRef.getCurrentRoute()?.params?.reload;
       if (reload) {
-        setReloadFlag((prev) => prev + 1);
+        setReloadFlag((prev) => prev + 1); // trigger reload
       }
     });
 
@@ -177,7 +175,7 @@ export default function Navigation() {
   if (isLoading) return null; // Bisa ditambahkan splash/loading screen
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef} key={appKey}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {firstTimeUser ? (
           <Stack.Screen name="Onboarding" component={OnboardingScreen} />

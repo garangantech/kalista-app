@@ -48,6 +48,10 @@ export default function OnboardingScreen({ navigation }) {
 
     // Navigasi ulang ke root untuk trigger useEffect
     navigation.navigate("Onboarding", { reload: Date.now() });
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: "MainTabs" }],
+    // });
   };
 
   return (
