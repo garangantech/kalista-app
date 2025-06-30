@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.rokiman.kalistaapp'
+    namespace 'com.nabila.kalistaapp'
     defaultConfig {
-        applicationId 'com.rokiman.kalistaapp'
+        applicationId 'com.nabila.kalistaapp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

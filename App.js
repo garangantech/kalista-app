@@ -5,6 +5,7 @@ import * as Notifications from "expo-notifications";
 import { Platform, ScrollView } from "react-native";
 import { scheduleNotification } from "./services/NotificationService";
 import { SearchProvider } from "./utils/SearchContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -14,7 +15,16 @@ Notifications.setNotificationHandler({
   }),
 });
 export default function App() {
+  // const clearAllData = async () => {
+  //   try {
+  //     await AsyncStorage.clear();
+  //     console.log("✅ Semua data berhasil dihapus dari AsyncStorage");
+  //   } catch (e) {
+  //     console.error("❌ Gagal menghapus data:", e);
+  //   }
+  // };
   useEffect(() => {
+    // clearAllData();
     const setupNotifications = async () => {
       const { status } = await Notifications.requestPermissionsAsync();
       if (status !== "granted") {

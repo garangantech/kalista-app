@@ -97,7 +97,7 @@ export default function ImmunizationScreen() {
 
     // Notifikasi H-1
     const minus1 = new Date(targetDate);
-    minus1.setDate(minus1.getDate() - 1);
+    minus1.setDate(minus1.getDate() - 2);
     await scheduleNotification(
       minus1,
       "Pengingat Imunisasi",
@@ -106,7 +106,7 @@ export default function ImmunizationScreen() {
 
     // Notifikasi H-3
     const minus3 = new Date(targetDate);
-    minus3.setDate(minus3.getDate() - 3);
+    minus3.setDate(minus3.getDate() - 4);
     await scheduleNotification(
       minus3,
       "Pengingat Imunisasi",

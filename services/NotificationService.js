@@ -30,7 +30,7 @@ export async function scheduleNotification(date, title, body) {
     return null;
   }
 
-  const trigger = { date };
+  const trigger = date;
 
   try {
     const id = await Notifications.scheduleNotificationAsync({

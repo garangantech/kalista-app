@@ -55,7 +55,7 @@ export default function MenstruationScreen() {
     }
 
     const data = {
-      lastPeriod: lastPeriod.toISOString(),
+      lastPeriod: lastPeriod.toString(),
       duration: dur,
       cycleLength: cyc,
     };

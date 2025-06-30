@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fe61ad"
     },
     "ios": {
       "supportsTablet": true
@@ -18,10 +18,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#fe61ad"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.rokiman.kalistaapp"
+      "package": "com.nabila.kalistaapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

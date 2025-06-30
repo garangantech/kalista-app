@@ -1,4 +1,4 @@
-package com.rokiman.kalistaapp
+package com.nabila.kalistaapp
 
 import android.app.Application
 import android.content.res.Configuration

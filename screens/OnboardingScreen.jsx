@@ -48,10 +48,6 @@ export default function OnboardingScreen({ navigation }) {
 
     // Navigasi ulang ke root untuk trigger useEffect
     navigation.navigate("Onboarding", { reload: Date.now() });
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{ name: "MainTabs" }],
-    // });
   };
 
   return (
@@ -173,39 +169,58 @@ export default function OnboardingScreen({ navigation }) {
       {step === 3 && (
         <>
           <Text style={styles.title}>Konfirmasi</Text>
-          <Text>Nama: {name}</Text>
-          <Text>
-            Tgl Lahir:{" "}
-            {birthDate.toLocaleDateString("id-ID", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </Text>
-          <Text>Status: {status}</Text>
-          {lastPeriod && (
-            <Text>
-              Haid Terakhir:{" "}
-              {lastPeriod.toLocaleDateString("id-ID", {
+          <View style={styles.card}>
+            <Text style={styles.itemLabel}>Nama</Text>
+            <Text style={styles.itemValue}>{name || "-"}</Text>
+
+            <Text style={styles.itemLabel}>Tanggal Lahir</Text>
+            <Text style={styles.itemValue}>
+              {birthDate.toLocaleDateString("id-ID", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
             </Text>
-          )}
-          {hpl && (
-            <Text>
-              HPL:{" "}
-              {hpl.toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </Text>
-          )}
-          {status === "Orang Tua" && (
-            <Text>Punya anak: {hasChild ? "Ya" : "Tidak"}</Text>
-          )}
+
+            <Text style={styles.itemLabel}>Status</Text>
+            <Text style={styles.itemValue}>{status || "-"}</Text>
+
+            {lastPeriod && (
+              <>
+                <Text style={styles.itemLabel}>Haid Terakhir</Text>
+                <Text style={styles.itemValue}>
+                  {lastPeriod.toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </Text>
+              </>
+            )}
+
+            {hpl && (
+              <>
+                <Text style={styles.itemLabel}>HPL</Text>
+                <Text style={styles.itemValue}>
+                  {hpl.toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </Text>
+              </>
+            )}
+
+            {status === "Orang Tua" && (
+              <>
+                <Text style={styles.itemLabel}>Memiliki Anak</Text>
+                <Text style={styles.itemValue}>
+                  {hasChild ? "Ya" : "Tidak"}
+                </Text>
+              </>
+            )}
+          </View>
+
           <TouchableOpacity style={styles.buttonPrimary} onPress={handleSave}>
             <Text style={styles.buttonText}>Simpan dan Mulai</Text>
           </TouchableOpacity>
@@ -277,5 +292,29 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 16,
+    marginVertical: 12,
+    borderWidth: 1,
+    borderColor: "#fe61ad20",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  itemLabel: {
+    fontSize: 14,
+    color: "#888",
+    marginTop: 12,
+    fontWeight: "600",
+  },
+  itemValue: {
+    fontSize: 15,
+    color: "#333",
+    marginTop: 4,
   },
 });

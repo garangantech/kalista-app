@@ -6,6 +6,9 @@
     "apk-release": {
       "android": {
         "buildType": "apk"
+      },
+      "cache": {
+        "disabled": true
       }
     }
   }

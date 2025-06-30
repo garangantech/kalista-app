@@ -71,7 +71,13 @@ export default function ProfileScreen() {
               style={styles.dateButton}
             >
               <Text>
-                {value ? new Date(value).toDateString() : "Pilih Tanggal"}
+                {value
+                  ? new Intl.DateTimeFormat("id-ID", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    }).format(new Date(value))
+                  : "Pilih Tanggal"}
               </Text>
             </TouchableOpacity>
           ) : (
@@ -83,7 +89,13 @@ export default function ProfileScreen() {
           )
         ) : (
           <Text style={styles.value}>
-            {isDate ? (value ? new Date(value).toDateString() : "-") : value}
+            {isDate && value
+              ? new Intl.DateTimeFormat("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }).format(new Date(value))
+              : value || "-"}
           </Text>
         )}
       </View>
