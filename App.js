@@ -18,9 +18,9 @@ export default function App() {
   // const clearAllData = async () => {
   //   try {
   //     await AsyncStorage.clear();
-  //     console.log("✅ Semua data berhasil dihapus dari AsyncStorage");
+  //     console.log("Semua data berhasil dihapus dari AsyncStorage");
   //   } catch (e) {
-  //     console.error("❌ Gagal menghapus data:", e);
+  //     console.error("Gagal menghapus data:", e);
   //   }
   // };
   useEffect(() => {

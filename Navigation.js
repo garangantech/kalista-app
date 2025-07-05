@@ -165,14 +165,14 @@ export default function Navigation() {
     const unsubscribe = navigationRef?.addListener("state", () => {
       const reload = navigationRef.getCurrentRoute()?.params?.reload;
       if (reload) {
-        setReloadFlag((prev) => prev + 1); // trigger reload
+        setReloadFlag((prev) => prev + 1);
       }
     });
 
     return unsubscribe;
   }, []);
 
-  if (isLoading) return null; // Bisa ditambahkan splash/loading screen
+  if (isLoading) return null;
 
   return (
     <NavigationContainer ref={navigationRef} key={appKey}>
