@@ -33,6 +33,9 @@ import MoodTrackerScreen from "./screens/MoodTrackerScreen";
 import NotificationScreen from "./screens/NotificationScreen";
 import AboutScreen from "./screens/AboutScreen";
 import { createNavigationContainerRef } from "@react-navigation/native";
+import SplashScreen from "./screens/SplashScreen";
+import { ActivityIndicator } from "react-native";
+import LoginScreen from "./screens/auth/LoginScreen";
 
 export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
@@ -140,142 +143,65 @@ function MainTabs({ navigation }) {
 }
 
 export default function Navigation() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTimeUser, setFirstTimeUser] = useState(false);
-  const [appKey, setAppKey] = useState(0);
-  const [reloadFlag, setReloadFlag] = useState(0);
 
   useEffect(() => {
-    const checkUser = async () => {
-      const user = await AsyncStorage.getItem("@user_profile");
-      if (user) {
-        const parsed = JSON.parse(user);
-        const isComplete = parsed.name && parsed.status;
-        setFirstTimeUser(!isComplete);
-      } else {
-        setFirstTimeUser(true);
-      }
-
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem("@token");
+      setIsAuthenticated(!!token); // true kalau token ada
       setIsLoading(false);
     };
-    checkUser();
-  }, [reloadFlag]);
-
-  useEffect(() => {
-    const unsubscribe = navigationRef?.addListener("state", () => {
-      const reload = navigationRef.getCurrentRoute()?.params?.reload;
-      if (reload) {
-        setReloadFlag((prev) => prev + 1);
-      }
-    });
-
-    return unsubscribe;
+    checkToken();
   }, []);
 
-  if (isLoading) return null;
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#fe61ad" />
+      </View>
+    );
+  }
 
   return (
-    <NavigationContainer ref={navigationRef} key={appKey}>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {firstTimeUser ? (
-          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        ) : (
+        {isAuthenticated ? (
           <>
             <Stack.Screen name="MainTabs" component={MainTabs} />
-
-            <Stack.Screen
-              name="Menstruation"
-              component={MenstruationScreen}
-              options={{ headerShown: true, title: "Fitur Siklus Haid" }}
-            />
-            <Stack.Screen
-              name="Pregnancy"
-              component={PregnancyScreen}
-              options={{ headerShown: true, headerTitle: "Fitur Kehamilan" }}
-            />
-            <Stack.Screen
-              name="Immunization"
-              component={ImmunizationScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "Imunisasi Anak",
-              }}
-            />
+            {/* Semua fitur yang sudah kamu punya */}
+            <Stack.Screen name="Menstruation" component={MenstruationScreen} />
+            <Stack.Screen name="Pregnancy" component={PregnancyScreen} />
+            <Stack.Screen name="Immunization" component={ImmunizationScreen} />
             <Stack.Screen
               name="PregnancyPlan"
               component={PregnancyPlanScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "Program Kehamilan",
-              }}
             />
-            <Stack.Screen
-              name="Pranikah"
-              component={PranikahScreen}
-              options={{ headerShown: true, headerTitle: "Fitur Pranikah" }}
-            />
-            <Stack.Screen
-              name="Edukasi"
-              component={EdukasiScreen}
-              options={{
-                headerShown: true,
-              }}
-            />
+            <Stack.Screen name="Pranikah" component={PranikahScreen} />
+            <Stack.Screen name="Edukasi" component={EdukasiScreen} />
             <Stack.Screen
               name="EdukasiDetail"
               component={EdukasiDetailScreen}
-              options={{ headerShown: true, headerTitle: "Artikel Edukasi" }}
             />
-            <Stack.Screen
-              name="GrowthChart"
-              component={GrowthChartScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "Tumbuh Kembang Anak",
-              }}
-            />
-            <Stack.Screen
-              name="KB"
-              component={KBScreen}
-              options={{ headerShown: true, headerTitle: "Simulasi KB" }}
-            />
-            <Stack.Screen
-              name="Profile"
-              component={ProfileScreen}
-              options={{ headerShown: true, headerTitle: "Profil Pengguna" }}
-            />
+            <Stack.Screen name="GrowthChart" component={GrowthChartScreen} />
+            <Stack.Screen name="KB" component={KBScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen
               name="BMICalculator"
               component={BMICalculatorScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "BMI (BodyMass Index)",
-              }}
             />
             <Stack.Screen
               name="WaterCalculator"
               component={WaterCalculatorScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "Kebutuhan Air Harian",
-              }}
             />
-            <Stack.Screen
-              name="ChecklistScreen"
-              component={ChecklistScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "Checklist Persiapan",
-              }}
-            />
-            <Stack.Screen
-              name="MoodTracker"
-              component={MoodTrackerScreen}
-              options={{
-                headerShown: true,
-                headerTitle: "Mood Tracker Harian",
-              }}
-            />
+            <Stack.Screen name="ChecklistScreen" component={ChecklistScreen} />
+            <Stack.Screen name="MoodTracker" component={MoodTrackerScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
           </>
         )}
       </Stack.Navigator>
