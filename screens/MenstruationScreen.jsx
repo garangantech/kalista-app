@@ -62,7 +62,7 @@ export default function MenstruationScreen() {
     await AsyncStorage.setItem("@menstruation_data", JSON.stringify(data));
     calculatePrediction(lastPeriod, dur, cyc);
 
-    // ⏰ Jadwal notifikasi haid berikutnya
+    // Jadwal notifikasi haid berikutnya
     const nextPeriod = new Date(lastPeriod);
     nextPeriod.setDate(nextPeriod.getDate() + cyc);
     await scheduleNotification(

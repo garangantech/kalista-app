@@ -5,7 +5,7 @@ export default function AboutScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* <Image
-        source={require("../assets/logo-kalista.png")} // ganti dengan logo kamu
+        source={require("../assets/logo-kalista.png")}
         style={styles.logo}
       /> */}
 
