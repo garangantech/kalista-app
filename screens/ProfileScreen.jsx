@@ -11,11 +11,13 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [datePickerKey, setDatePickerKey] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -139,6 +141,33 @@ export default function ProfileScreen() {
             <Text style={styles.buttonText}>Edit Profil</Text>
           </TouchableOpacity>
         )}
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#ccc", marginTop: 12 }]}
+          onPress={async () => {
+            Alert.alert("Keluar", "Yakin ingin logout?", [
+              { text: "Batal" },
+              {
+                text: "Ya",
+                onPress: async () => {
+                  await AsyncStorage.removeItem("@token");
+                  await AsyncStorage.removeItem("@user_profile");
+                  setTimeout(() => {
+                    // Navigasi ke Splash
+                    if (typeof navigation !== "undefined") {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{ name: "Splash" }],
+                      });
+                    }
+                  }, 100);
+                },
+              },
+            ]);
+          }}
+        >
+          <Text style={styles.buttonText}>Keluar</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

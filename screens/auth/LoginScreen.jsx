@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "../../services/axiosInstance";
 import { API } from "../../utils/api";
+import { resetToMainTabs } from "../../navigation/RootNavigation";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -42,10 +43,7 @@ export default function LoginScreen() {
       console.log("Token & user saved.");
       console.log("Navigating to MainTabs...");
 
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "MainTabs" }],
-      });
+      resetToMainTabs();
     } catch (error) {
       console.log("Login error:");
 

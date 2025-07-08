@@ -1,12 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
-import Navigation, { navigationRef } from "./Navigation";
+// import Navigation, { navigationRef } from "./Navigation";
+
 import * as Notifications from "expo-notifications";
-import { Platform, ScrollView } from "react-native";
-import { scheduleNotification } from "./services/NotificationService";
 import { SearchProvider } from "./utils/SearchContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import SplashScreen from "./screens/SplashScreen";
+import Navigation from "./navigation/Navigation";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -34,7 +33,7 @@ export default function App() {
       }
       console.log("✅ Izin notifikasi diizinkan");
     };
-    console.log("Ref ready?", navigationRef.isReady());
+    // console.log("Ref ready?", navigationRef.isReady());
     setupNotifications();
   }, []);
 

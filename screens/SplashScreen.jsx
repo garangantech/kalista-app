@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator } from "react-native";
 
 export default function SplashScreen() {
   const navigation = useNavigation();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem("@token");
+
+      // Delay 1.5 detik biar sempat lihat splash
+      setTimeout(() => {
+        if (token) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "MainTabs" }],
+          });
+        } else {
+          setCheckingAuth(false); // tampilkan UI login/register
+        }
+      }, 1500);
+    };
+
+    checkToken();
+  }, []);
+
+  if (checkingAuth) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#fe61ad" />
+        <Text style={{ marginTop: 20 }}>Memeriksa sesi login...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
