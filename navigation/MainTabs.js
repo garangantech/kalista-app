@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, Text } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// Screens
 import DashboardScreen from "../screens/DashboardScreen";
 import MenuScreen from "../screens/MenuScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import AboutScreen from "../screens/AboutScreen";
 import CustomDashboardHeader from "../components/CustomDashboardHeader";
+
+// Forum (user vs perawat)
 import ForumEntryRedirect from "../screens/forum/ForumEntryRedirect";
+import ForumListPerawatScreen from "../screens/forum/ForumListPerawatScreen";
+import ForumChatPerawatScreen from "../screens/forum/ForumChatPerawatScreen";
+import ForumEntryRedirectPerawat from "../screens/forum/ForumEntryRedirectPerawat";
 
 const Tab = createBottomTabNavigator();
 
 export default function MainTabs({ navigation }) {
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const fetchRole = async () => {
+      const userData = await AsyncStorage.getItem("@user_profile");
+      if (userData) {
+        const parsed = JSON.parse(userData);
+        setRole(parsed.role); // "user" atau "nurse"
+      }
+    };
+    fetchRole();
+  }, []);
+
+  // Tampilkan null/loader saat role belum dimuat
+  if (!role) return null;
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -25,6 +48,8 @@ export default function MainTabs({ navigation }) {
           else if (route.name === "Notif") iconName = "notifications-outline";
           else if (route.name === "About")
             iconName = "information-circle-outline";
+          else if (route.name === "Forum")
+            iconName = "chatbubble-ellipses-outline";
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
@@ -43,6 +68,7 @@ export default function MainTabs({ navigation }) {
           },
         })}
       />
+
       <Tab.Screen
         name="Menu"
         component={MenuScreen}
@@ -65,9 +91,13 @@ export default function MainTabs({ navigation }) {
           ),
         }}
       />
+
+      {/* Tab Forum bergantung pada role */}
       <Tab.Screen
         name="Forum"
-        component={ForumEntryRedirect}
+        component={
+          role === "perawat" ? ForumEntryRedirectPerawat : ForumEntryRedirect
+        }
         options={{
           tabBarLabel: "Forum",
           tabBarIcon: ({ color, size }) => (
@@ -77,8 +107,10 @@ export default function MainTabs({ navigation }) {
               color={color}
             />
           ),
+          headerTitle: role === "perawat" ? "Forum Pasien" : "Forum",
         }}
       />
+
       <Tab.Screen
         name="Notif"
         component={NotificationScreen}
@@ -101,6 +133,7 @@ export default function MainTabs({ navigation }) {
           ),
         }}
       />
+
       <Tab.Screen
         name="About"
         component={AboutScreen}

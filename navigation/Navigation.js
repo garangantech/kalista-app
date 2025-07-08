@@ -22,6 +22,8 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 import ForumChatScreen from "../screens/forum/ForumChatScreen";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import ForumChatPerawatScreen from "../screens/forum/ForumChatPerawatScreen";
+import ForumListPerawatScreen from "../screens/forum/ForumListPerawatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +42,40 @@ export default function Navigation() {
             headerShown: true,
             headerTitle: "Forum Tanya Jawab",
             headerBackVisible: false, // sembunyikan default back
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigationRef.current?.navigate("MainTabs")}
+                style={{ paddingHorizontal: 16 }}
+              >
+                <Ionicons name="arrow-back" size={24} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="ForumChatPerawat"
+          component={ForumChatPerawatScreen}
+          options={{
+            headerShown: true,
+            headerTitle: "Forum Tanya Jawab",
+            headerBackVisible: false,
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigationRef.current?.navigate("MainTabs")}
+                style={{ paddingHorizontal: 16 }}
+              >
+                <Ionicons name="arrow-back" size={24} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="ForumListPerawat"
+          component={ForumListPerawatScreen}
+          options={{
+            headerShown: true,
+            headerTitle: "Forum Tanya Jawab",
+            headerBackVisible: false,
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => navigationRef.current?.navigate("MainTabs")}
