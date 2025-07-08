@@ -142,20 +142,27 @@ export default function ForumChatScreen() {
         <View style={styles.header}>
           <Text style={styles.headerText}>Tanya Perawat</Text>
         </View>
+
         <View style={styles.empty}>
-          <Text style={{ textAlign: "center", marginBottom: 20 }}>
+          <Text style={styles.emptyText}>
             {forum
-              ? "Forum sebelumnya telah ditutup. Ajukan pertanyaan baru jika dibutuhkan."
-              : "Kamu belum mengirim pertanyaan. Tulis pertanyaan kamu di bawah."}
+              ? "Forum sebelumnya telah ditutup.\nAjukan pertanyaan baru jika dibutuhkan."
+              : "Kamu belum mengirim pertanyaan.\nTulis pertanyaan kamu di bawah."}
           </Text>
+
           <TextInput
-            placeholder="Tulis pertanyaan..."
+            placeholder="Tulis pertanyaan kamu di sini..."
             value={newQuestion}
             onChangeText={setNewQuestion}
-            style={styles.input}
+            style={styles.inputNewForum}
             multiline
+            textAlignVertical="top"
           />
-          <TouchableOpacity onPress={sendQuestion} style={styles.sendButton}>
+
+          <TouchableOpacity
+            onPress={sendQuestion}
+            style={styles.sendButtonFull}
+          >
             <Text style={styles.sendText}>Kirim Pertanyaan</Text>
           </TouchableOpacity>
         </View>
@@ -173,7 +180,7 @@ export default function ForumChatScreen() {
       <View style={styles.header}>
         <Text style={styles.headerText}>
           {forum.status === "open"
-            ? "⏳ Menunggu perawat menangani..."
+            ? "⏳ Menunggu perawat..."
             : `🩺 Ditangani oleh: ${forum.handled_by?.name || "Perawat"}`}
         </Text>
       </View>
@@ -238,7 +245,11 @@ export default function ForumChatScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
-    padding: 14,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
     backgroundColor: "#fff0f5",
     borderBottomWidth: 1,
     borderBottomColor: "#fe61ad30",
@@ -295,6 +306,34 @@ const styles = StyleSheet.create({
   empty: {
     padding: 20,
     justifyContent: "center",
+    alignItems: "center",
+  },
+
+  emptyText: {
+    textAlign: "center",
+    fontSize: 16,
+    marginBottom: 20,
+    color: "#333",
+  },
+
+  inputNewForum: {
+    width: "100%",
+    height: 120,
+    backgroundColor: "#f7f7f7",
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: 16,
+    fontSize: 15,
+    marginBottom: 20,
+  },
+
+  sendButtonFull: {
+    backgroundColor: "#fe61ad",
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    alignSelf: "stretch",
     alignItems: "center",
   },
 });

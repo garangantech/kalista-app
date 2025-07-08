@@ -94,7 +94,13 @@ export default function ForumListPerawatScreen() {
     );
   }
 
-  return (
+  return forums.length === 0 ? (
+    <View style={styles.center}>
+      <Text style={{ color: "#666", fontSize: 16, textAlign: "center" }}>
+        Belum ada forum yang perlu ditangani.
+      </Text>
+    </View>
+  ) : (
     <FlatList
       data={forums}
       renderItem={renderItem}

@@ -139,7 +139,7 @@ export default function ForumChatPerawatScreen() {
             key={index}
             style={[
               styles.bubble,
-              reply.sender_role === "nurse" ? styles.right : styles.left,
+              reply.sender_role === "perawat" ? styles.right : styles.left,
             ]}
           >
             <Text style={styles.sender}>{reply.sender_name}</Text>
@@ -170,7 +170,11 @@ export default function ForumChatPerawatScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
-    padding: 14,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
     backgroundColor: "#fff0f5",
     borderBottomWidth: 1,
     borderBottomColor: "#fe61ad30",
@@ -224,11 +228,9 @@ const styles = StyleSheet.create({
 
   closeButton: {
     backgroundColor: "#999",
-    padding: 10,
-    borderRadius: 8,
-    alignSelf: "flex-start",
-    marginVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
   },
   closeText: {
     color: "#fff",
