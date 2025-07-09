@@ -85,6 +85,8 @@ export default function ForumChatPerawatScreen() {
 
   useEffect(() => {
     fetchReplies();
+    console.log("role: ", forum.id);
+
     const interval = setInterval(fetchReplies, 3000);
     return () => clearInterval(interval);
   }, []);

@@ -1,4 +1,4 @@
-const BASE_URL = "https://4cbe8c981504.ngrok-free.app/api";
+const BASE_URL = "https://api3.pulsecare.my.id/api";
 
 export const API = {
   login: `${BASE_URL}/login`,

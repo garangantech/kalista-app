@@ -61,13 +61,29 @@ export default function ForumListPerawatScreen() {
   const handleForum = async (forum) => {
     try {
       const token = await getToken();
+
+      // 1. Tangani forum
       await axios.post(
         "/forum/handle",
         { forum_id: forum.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      navigation.navigate("ForumChatPerawat", { forum }); // kirim seluruh object
+      // 2. Ambil ulang forum yang sudah ditangani (dengan handled_by)
+      const res = await axios.get("/forum/handled", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      // 3. Cari forum yang baru saja dihandle
+      const updatedForum = res.data.data.find((f) => f.id === forum.id);
+
+      if (!updatedForum) {
+        console.log("⚠️ Forum tidak ditemukan setelah handle");
+        return;
+      }
+
+      // 4. Navigasi ke screen chat dengan forum yang sudah update
+      navigation.navigate("ForumChatPerawat", { forum: updatedForum });
     } catch (err) {
       console.log("❌ Gagal menangani forum:", err);
     }
