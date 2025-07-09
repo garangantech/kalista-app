@@ -31,7 +31,7 @@ export default function ForumChatPerawatScreen() {
   const fetchReplies = async () => {
     try {
       const token = await getToken();
-      const res = await axios.get(`/forum/${forum.id}/replies`, {
+      const res = await axios.get(`/forum/${forum.id}/chat`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReplies(res.data.data);
@@ -85,7 +85,7 @@ export default function ForumChatPerawatScreen() {
 
   useEffect(() => {
     fetchReplies();
-    console.log("role: ", forum.id);
+    console.log("questions_id: ", forum.id);
 
     const interval = setInterval(fetchReplies, 3000);
     return () => clearInterval(interval);
