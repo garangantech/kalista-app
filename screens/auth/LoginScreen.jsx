@@ -7,18 +7,24 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
+  Image,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "../../services/axiosInstance";
 import { API } from "../../utils/api";
 import { resetToMainTabs } from "../../navigation/RootNavigation";
+import { KeyboardAvoidingView } from "react-native";
+import { Platform } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [secureText, setSecureText] = useState(true);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -70,43 +76,70 @@ export default function LoginScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Masuk ke KALISTA</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={email}
-        onChangeText={setEmail}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-
-      <Button
-        title={isSubmitting ? "Memproses..." : "Masuk"}
-        onPress={handleLogin}
-        disabled={isSubmitting}
-        color="#fe61ad"
-      />
-
-      <TouchableOpacity
-        style={{ marginTop: 20 }}
-        onPress={() => navigation.navigate("Register")}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={40} // atur ini sesuai header / offset layout
+    >
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
       >
-        <Text style={{ color: "#555" }}>
-          Belum punya akun?{" "}
-          <Text style={{ color: "#fe61ad" }}>Daftar di sini</Text>
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <View style={{ alignItems: "center", marginBottom: 20 }}>
+          <Image
+            source={require("../../assets/login.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </View>
+        <Text style={styles.title}>Masuk ke KALISTA</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="gray"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.inputPassword}
+            placeholder="Password"
+            placeholderTextColor="gray"
+            secureTextEntry={secureText}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity onPress={() => setSecureText(!secureText)}>
+            <Ionicons
+              name={secureText ? "eye" : "eye-off"}
+              size={22}
+              color="#888"
+            />
+          </TouchableOpacity>
+        </View>
+
+        <Button
+          title={isSubmitting ? "Memproses..." : "Masuk"}
+          onPress={handleLogin}
+          disabled={isSubmitting}
+          color="#fe61ad"
+        />
+
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text style={{ color: "#555" }}>
+            Belum punya akun?{" "}
+            <Text style={{ color: "#fe61ad" }}>Daftar di sini</Text>
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -131,5 +164,31 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 16,
     backgroundColor: "#fff",
+  },
+
+  logo: {
+    width: 160,
+    height: 160,
+    textAlign: "center",
+  },
+
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    marginBottom: 16,
+    backgroundColor: "#fff",
+    paddingHorizontal: 12,
+  },
+  inputPassword: {
+    flex: 1,
+    paddingVertical: 12,
+    color: "#333",
+  },
+
+  toggleButton: {
+    paddingHorizontal: 10,
   },
 });

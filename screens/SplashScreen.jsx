@@ -41,7 +41,7 @@ export default function SplashScreen() {
     <View style={styles.container}>
       {/* Logo / Ilustrasi */}
       <Image
-        source={require("../assets/icon.png")} // ganti sesuai logo kamu
+        source={require("../assets/login.png")} // ganti sesuai logo kamu
         style={styles.logo}
         resizeMode="contain"
       />
